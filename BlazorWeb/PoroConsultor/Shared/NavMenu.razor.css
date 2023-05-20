@@ -1,0 +1,164 @@
+header { /*color y posicion fijada arriba*/
+    background-image: url("fondoHeader.jpg"); /*CAMBIAR*/
+    background-repeat: no-repeat;
+    background-size: 2000px;
+    background-position-x: center;
+    background-position-y: -210px;
+    border-bottom: solid 3px rgb(153, 255, 0); /*CAMBIAR COLOR*/
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+}
+
+.ulHeader { /*es el contenedor de la lista*/
+    display: inline-block;
+    margin: 20px 60px 25px 60px;
+    padding: 0;
+    list-style: none;
+}
+
+    .ulHeader li { /*cada elemento de la lista*/
+        display: inline-block;
+        margin-right: 15px;
+        align-content: center;
+        padding: 10px;
+        font-size: large;
+        color: white;
+        cursor: pointer;
+    }
+
+        .ulHeader li:hover { /*subrayado cuando te pones encima*/
+            text-decoration: underline;
+        }
+
+        .ulHeader li:first-child { /*cambia el css de la casita porque sino cambia el tamaño de la barra y lo descuadra*/
+            position: relative;
+            top: 10px;
+            padding: 0;
+        }
+
+#logo { /*img del logo*/ /*CAMBIAR*/
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    height: 120px;
+}
+
+/*#carrito { /*imagen del carrito
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 52px;
+}*/
+
+#casita { /*imagen de la casita*/
+   position:relative;
+   top:-13px;
+   left:-10px;
+   width: 35px;
+}
+
+header div { 
+    text-align: center;
+}
+
+.navbar-toggle {
+    display: none;
+}
+
+.navbar-menu {
+    margin:auto;
+}
+.navbar {
+    margin-left:80px;
+}
+
+/*-------------MENU HAMBURGUESA---------------*/
+@media (max-width: 950px) {
+    #logo {
+        position: absolute; /*CAMBIAR*/
+        top: 0;
+        left: 10px;
+        height: 100px;
+    }
+
+    .navbar { /*icono general*/
+        position: absolute;
+        top: 25px;
+        /*left: 160px;*/
+        right: 60px;
+    }
+
+    .navbar-toggle { /*el checkbox*/
+        display: none;
+    }
+
+    .navbar-toggle-icon { /*icono*/
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: relative;
+        cursor: pointer;
+        background-color: rgba(128, 255, 0, 0);
+    }
+
+        .navbar-toggle-icon::before,
+        .navbar-toggle-icon::after { /*forma general del icono*/
+            content: "";
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: rgb(94, 255, 0); /*CAMBIAR COLOR*/
+            position: absolute;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-toggle-icon::before { /*forma especifica icono*/
+            top: 6px;
+            margin-top: 1px;
+        }
+
+        .navbar-toggle-icon::after {
+            top: 12px;
+            margin-top: 6px;
+        }
+
+    .navbar-menu { /*menu*/
+        position: fixed;
+        top: 71px;
+        left: 0;
+        background-color: #0000009e;
+        width: 100%;
+        padding: 10px;
+        display: none;
+        margin-top: 27px;
+        border-bottom: solid 3px rgb(153, 255, 0); /*CAMBIAR COLOR*/
+    }
+
+        .navbar-menu ul { /*la lista del menu*/
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .navbar-menu ul li { /*cada item de la lista*/
+                margin-bottom: 10px;
+            }
+
+    .navbar-toggle:checked + .navbar-toggle-icon::before { /*forma icono al pinchar y checkbox marcado*/
+        transform: rotate(45deg);
+        top: 12px;
+    }
+
+    .navbar-toggle:checked + .navbar-toggle-icon::after {
+        transform: rotate(-45deg);
+        top: 8px;
+    }
+
+    .navbar-toggle:checked ~ .navbar-menu {
+        display: block;
+    }
+}
