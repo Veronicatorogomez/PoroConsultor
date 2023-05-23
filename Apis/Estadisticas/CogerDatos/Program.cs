@@ -8,7 +8,9 @@ internal class Program
 {
 	static async Task Main(string[] args)
 	{
-		using var playwright = await Playwright.CreateAsync();
+        //Microsoft.Playwright.Program.Main(new[] { "install" });
+
+        using var playwright = await Playwright.CreateAsync();
 		await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = false });
 		var page = await browser.NewPageAsync();
 		await page.GotoAsync("https://www.mobachampion.com/champion/");
