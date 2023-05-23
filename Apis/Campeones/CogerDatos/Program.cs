@@ -28,18 +28,17 @@ internal class Program
             Thread.Sleep(500);
             await page.EvaluateAsync($"window.scrollTo(0, {i * 60 + 200})");//hace scroll hasta el personaje mas o menos para que no de error por no cargar
             IReadOnlyList<IElementHandle> elementoPersonajes = await page.QuerySelectorAllAsync(".ehjaZK");
-            await AnadirPersonaje(elementoPersonajes[i], page, personajes);//pasa datos al metodo
+			IReadOnlyList<IElementHandle> elementoImagenPrincipal = await page.QuerySelectorAllAsync(".ehjaZK img");
+			string imagenPrincipal = await elementoImagenPrincipal[i].GetAttributeAsync("src");//coge imagen principal
+			await AnadirPersonaje(elementoPersonajes[i], page, personajes,imagenPrincipal);//pasa datos al metodo
         }
 
         using FileStream fileStream = File.Open("../../../../../../BlazorWeb/PoroConsultor/wwwroot/apis/campeones.json", FileMode.Create);//crea un fichero donde guardar
         JsonSerializer.Serialize(fileStream, personajes);//serializa, escribe en json
 
     }
-    public static async Task AnadirPersonaje(IElementHandle personaje, IPage page, List<Campeones> personajes)
+    public static async Task AnadirPersonaje(IElementHandle personaje, IPage page, List<Campeones> personajes, string imagenPrincipal)
     {
-        IElementHandle elementoImagenPrincipal = await page.QuerySelectorAsync(".ehjaZK img");
-        string imagenPrincipal = await elementoImagenPrincipal.GetAttributeAsync("src");//coge imagen principal
-
         Thread.Sleep(1000);
         await personaje.ClickAsync();//hace click en el personaje que se le pasa
 

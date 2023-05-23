@@ -1,0 +1,26 @@
+﻿@page "/campeones"
+@inject HttpClient Http
+
+
+
+<div class="container">
+
+    @foreach(var campeon in campeones)
+    {
+        <div class="item">
+            <img class="img" src="@campeon.ImagenPrincipal">
+            <p>@campeon.Nombre</p>
+        </div>
+    }
+
+</div>
+
+@code {
+    private List<Campeones> campeones;
+
+    protected override async Task OnInitializedAsync()
+    {
+        campeones = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
+    }
+
+}
