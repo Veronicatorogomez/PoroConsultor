@@ -37,6 +37,9 @@ internal class Program
     }
     public static async Task AnadirPersonaje(IElementHandle personaje, IPage page, List<Campeones> personajes)
     {
+        IElementHandle elementoImagenPrincipal = await page.QuerySelectorAsync(".ehjaZK img");
+        string imagenPrincipal = await elementoImagenPrincipal.GetAttributeAsync("src");//coge imagen principal
+
         Thread.Sleep(1000);
         await personaje.ClickAsync();//hace click en el personaje que se le pasa
 
@@ -46,8 +49,6 @@ internal class Program
         string nombre = await elementoNombre[1].InnerTextAsync();//coge su nombre oficial
         string apodo = await elementoNombre[0].InnerTextAsync();//coge su apodo, o como lo llaman
 
-        IElementHandle elementoImagenPrincipal = await page.QuerySelectorAsync(".style__ForegroundAsset-sc-8gkpub-4 img");
-        string imagenPrincipal = await elementoImagenPrincipal.GetAttributeAsync("src");//coge imagen principal
 
         IElementHandle elementoDescripcion = await page.QuerySelectorAsync(".style__Desc-sc-8gkpub-9");
         string descripcion = await elementoDescripcion.InnerTextAsync();//coge descripcion personahe
