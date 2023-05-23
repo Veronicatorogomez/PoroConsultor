@@ -109,8 +109,10 @@ a, .btn-link {
 
 a.linkHeader {
     all: unset;
+    font-weight:bold;
 }
 
     a.linkHeader:hover {
         all: unset;
+        font-weight: bold;
     }

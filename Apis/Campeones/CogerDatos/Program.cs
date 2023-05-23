@@ -25,7 +25,8 @@ internal class Program
 
 		for (int i = 0; i < elementoPersonajesInicio.Count; i++)
         {
-            await page.EvaluateAsync($"window.scrollTo(0, {i * 30})");//hace scroll hasta el personaje mas o menos para que no de error por no cargar
+            Thread.Sleep(500);
+            await page.EvaluateAsync($"window.scrollTo(0, {i * 60 + 200})");//hace scroll hasta el personaje mas o menos para que no de error por no cargar
             IReadOnlyList<IElementHandle> elementoPersonajes = await page.QuerySelectorAllAsync(".ehjaZK");
             await AnadirPersonaje(elementoPersonajes[i], page, personajes);//pasa datos al metodo
         }

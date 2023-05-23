@@ -1,10 +1,11 @@
 header { /*color y posicion fijada arriba*/
-    background-image: url("fondoHeader.jpg"); /*CAMBIAR*/
-    background-repeat: no-repeat;
+    /*background-image: url("fondoHeader.jpg");*/ /*CAMBIAR SI QUIERO METER IMAGEN*/
+    /*background-repeat: no-repeat;
     background-size: 2000px;
     background-position-x: center;
-    background-position-y: -210px;
-    border-bottom: solid 3px rgb(153, 255, 0); /*CAMBIAR COLOR*/
+    background-position-y: -210px;*/
+    background-color: black;
+    border-bottom: solid 3px #D4AF37; /*CAMBIAR COLOR*/
     position: sticky;
     top: 0;
     width: 100%;
@@ -39,11 +40,11 @@ header { /*color y posicion fijada arriba*/
             padding: 0;
         }
 
-#logo { /*img del logo*/ /*CAMBIAR*/
+#logo { /*img del logo*/
     position: absolute;
-    top: -10px;
-    left: 10px;
-    height: 120px;
+    top: 8px;
+    left: 30px;
+    height: 90px;
 }
 
 /*#carrito { /*imagen del carrito
@@ -77,13 +78,6 @@ header div {
 
 /*-------------MENU HAMBURGUESA---------------*/
 @media (max-width: 950px) {
-    #logo {
-        position: absolute; /*CAMBIAR*/
-        top: 0;
-        left: 10px;
-        height: 100px;
-    }
-
     .navbar { /*icono general*/
         position: absolute;
         top: 25px;
@@ -110,7 +104,7 @@ header div {
             display: block;
             width: 100%;
             height: 4px;
-            background-color: rgb(94, 255, 0); /*CAMBIAR COLOR*/
+            background-color: #D4AF37; /*CAMBIAR COLOR*/
             position: absolute;
             left: 0;
             transition: transform 0.3s ease;
@@ -135,7 +129,7 @@ header div {
         padding: 10px;
         display: none;
         margin-top: 27px;
-        border-bottom: solid 3px rgb(153, 255, 0); /*CAMBIAR COLOR*/
+        border-bottom: solid 3px #D4AF37; /*CAMBIAR COLOR*/
     }
 
         .navbar-menu ul { /*la lista del menu*/

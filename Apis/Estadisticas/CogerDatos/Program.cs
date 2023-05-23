@@ -12,13 +12,12 @@ internal class Program
 		await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions() { Headless = false });
 		var page = await browser.NewPageAsync();
 		await page.GotoAsync("https://www.mobachampion.com/champion/");
-
-		ILocator locator = page.Locator(".css-47sehv");//quita las cookies
+        ILocator locator = page.Locator(".css-47sehv");//quita las cookies
 		await locator.WaitForAsync(new() { Timeout = 3000 });
 		await locator.ClickAsync();
 
-		Thread.Sleep(1000);
-		IReadOnlyList<IElementHandle> elementoPersonajesInicio = await page.QuerySelectorAllAsync(".text-xs.font-bold");
+        Thread.Sleep(1000);
+        IReadOnlyList<IElementHandle> elementoPersonajesInicio = await page.QuerySelectorAllAsync(".text-xs.font-bold");
 		List<Estadisticas> personajes = new List<Estadisticas>(elementoPersonajesInicio.Count);
 
 		for (int i = 0; i < elementoPersonajesInicio.Count; i++)
@@ -51,8 +50,8 @@ internal class Program
 		await elementoBotonStats[0].ClickAsync();
 		Thread.Sleep(1000);
 
-		IElementHandle elementoNombre = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre
-		string nombre = await elementoNombre.InnerTextAsync();
+		IElementHandle elementoNombre = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre 
+        string nombre = await elementoNombre.InnerTextAsync();
 
         IElementHandle elementoImagen = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre
         string imagen = await elementoImagen.GetAttributeAsync("src");
