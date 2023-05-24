@@ -24,7 +24,7 @@ else
 	{
 		@if (orden)
 		{
-			@foreach (var campeon in campeonesPaginados)
+			@foreach (var campeon in campeonesPaginadosAlreves)
 			{
 				<button class="item">
 					<img class="img" src="@campeon.ImagenPrincipal">
@@ -34,7 +34,7 @@ else
 		}
 		else
 		{
-			@foreach (var campeon in campeonesPaginadosAlreves)
+			@foreach (var campeon in campeonesPaginados)
 			{
 				<button class="item">
 					<img class="img" src="@campeon.ImagenPrincipal">
@@ -69,6 +69,7 @@ else
 		campeones = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
 		
 		await PaginarCampeones();
+
 		await PaginarCampeonesAlreves();
 	}
 
@@ -79,9 +80,10 @@ else
 	}
 	private Task PaginarCampeonesAlreves()
 	{
-		campeones.Reverse();
-		campeonesPaginadosAlreves = campeones.Skip((numeroPagina - 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
-		campeonesPaginadosAlreves.Reverse(); // Invierte la lista paginada para restaurar el orden original
+		//dar la vuelta con un for
+		//campeones.Reverse();
+		//campeonesPaginadosAlreves = campeones.Skip((numeroPagina + 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
+		//campeonesPaginadosAlreves.Reverse(); // Invierte la lista paginada para restaurar el orden original
 		return Task.CompletedTask;
 	}
 
@@ -100,6 +102,7 @@ else
 		{
 			numeroPagina++;
 			PaginarCampeones();
+			
 		}
 	}
 
