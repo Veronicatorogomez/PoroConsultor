@@ -22,9 +22,10 @@ internal class Program
         IReadOnlyList<IElementHandle> elementoPersonajesInicio = await page.QuerySelectorAllAsync(".text-xs.font-bold");
 		List<Estadisticas> personajes = new List<Estadisticas>(elementoPersonajesInicio.Count);
 
-		for (int i = 0; i < elementoPersonajesInicio.Count; i++)
+		for (int i = 119; i < elementoPersonajesInicio.Count; i++)
 		{
 			await page.EvaluateAsync($"window.scrollTo(0, {i * 76 + 700})");
+			Thread.Sleep(1000);
 			IReadOnlyList<IElementHandle> elementoPersonajes = await page.QuerySelectorAllAsync(".text-xs.font-bold");
 			await AnadirPersonaje(elementoPersonajes[i], page, personajes);
 			if (i % 20 == 0)//esto es porque la pagina no esta bien optimizada y te llena la cache, entonces cerramos y volvemos a abrir

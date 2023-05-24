@@ -2,25 +2,105 @@
 @inject HttpClient Http
 
 
+@if (orden)
+{
+	<input id="desciende" type="checkbox" @bind="orden" />
+	<label for="desciende"><img class="orden" src="/Recursos/imagenes/asciende.png" /></label>
+}
+else
+{
+	<input id="asciende" type="checkbox" @bind="orden" />
+	<label for="asciende"><img class="orden" src="/Recursos/imagenes/desciende.png" /></label>
+}
+
 
 <div class="container">
 
-    @foreach(var campeon in campeones)
-    {
-        <div class="item">
-            <img class="img" src="@campeon.ImagenPrincipal">
-            <p>@campeon.Nombre</p>
-        </div>
-    }
+	@if (campeones == null)
+	{
+		<p>Loading...</p>
+	}
+	else
+	{
+		@if (orden)
+		{
+			@foreach (var campeon in campeonesPaginados)
+			{
+				<button class="item">
+					<img class="img" src="@campeon.ImagenPrincipal">
+					<p>@campeon.Nombre</p>
+				</button>
+			}
+		}
+		else
+		{
+			@foreach (var campeon in campeonesPaginadosAlreves)
+			{
+				<button class="item">
+					<img class="img" src="@campeon.ImagenPrincipal">
+					<p>@campeon.Nombre</p>
+				</button>
+			}
+			
+		}
+
+	}
 
 </div>
 
-@code {
-    private List<Campeones> campeones;
+<button class="paginado" @onclick="IrPaginaAnterior">Anterior</button>
+<p class="paginado">@numeroPagina</p>
+<button class="paginado" @onclick="IrPaginaSiguiente">Siguiente</button>
 
-    protected override async Task OnInitializedAsync()
-    {
-        campeones = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
-    }
+
+@code {
+
+	List<Campeones> campeonesPaginados = new List<Campeones>();
+	List<Campeones> campeonesPaginadosAlreves = new List<Campeones>();
+	int numeroPagina = 1;
+	int elementosPorPagina = 50;
+
+
+	private bool orden;
+	private List<Campeones?> campeones;
+
+	protected override async Task OnInitializedAsync()
+	{
+		campeones = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
+		
+		await PaginarCampeones();
+		await PaginarCampeonesAlreves();
+	}
+
+	private Task PaginarCampeones()
+	{
+		campeonesPaginados = campeones.Skip((numeroPagina - 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
+		return Task.CompletedTask;
+	}
+	private Task PaginarCampeonesAlreves()
+	{
+		campeones.Reverse();
+		campeonesPaginadosAlreves = campeones.Skip((numeroPagina - 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
+		campeonesPaginadosAlreves.Reverse(); // Invierte la lista paginada para restaurar el orden original
+		return Task.CompletedTask;
+	}
+
+	private void IrPaginaAnterior()
+	{
+		if(numeroPagina != 1)
+		{
+			numeroPagina--;
+			PaginarCampeones();
+		}
+	}
+
+	private void IrPaginaSiguiente()
+	{
+		if (numeroPagina != 4)
+		{
+			numeroPagina++;
+			PaginarCampeones();
+		}
+	}
 
 }

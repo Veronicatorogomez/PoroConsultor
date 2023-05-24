@@ -7,14 +7,17 @@
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
     width: 90%;
     margin: auto;
+    margin-top:80px;/* para meter los filtros y buscador */
+    margin-bottom:50px;
 }
 
 .item {
     background-color: rgb(48, 48, 48);
-    width: 153px;
+    padding:0;
+    width: 203px;
     margin: auto;
     margin-top: 30px;
     text-align: center;
@@ -26,10 +29,11 @@
 
 .img {
     border-radius: 40px 0 0 0;
-    width: 150px;
+    width: 200px;
     border: solid 2px gold;
-    transition: 0.5s ease-in-out;
+    height: 225.19px;
     object-fit: cover;
+    transition: 0.5s ease-in-out;
 }
 
 p {
@@ -41,13 +45,46 @@ p {
 
 .item:hover {
     border-radius: 0 43px 0 40px;
-    transition: 0.5s ease-in-out;
     box-shadow: 0 0 20px 2px rgb(3, 3, 3);
-    width: 173px;
+    width: 223px;
+    transition: 0.5s ease-in-out;
 }
 
     .item:hover img {
         border-radius: 0 41px 0 0;
+        width: 220px;
+        height:260px;
         transition: 0.5s ease-in-out;
-        width: 170px;
     }
+
+
+.orden {
+    position: absolute;
+    top: 130px;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+    .orden:hover {
+        background-color: #6C6C6C80;
+        transition: 0.3s ease-in-out;
+    }
+
+#asciende, #desciende{
+    all:unset;
+}
+
+.paginado{
+    display:inline-block;
+}
+
+button.paginado{
+
+}
+p.paginado{
+    color:black;
+}
