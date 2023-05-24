@@ -22,7 +22,7 @@ internal class Program
         IReadOnlyList<IElementHandle> elementoPersonajesInicio = await page.QuerySelectorAllAsync(".text-xs.font-bold");
 		List<Estadisticas> personajes = new List<Estadisticas>(elementoPersonajesInicio.Count);
 
-		for (int i = 119; i < elementoPersonajesInicio.Count; i++)
+		for (int i = 0; i < elementoPersonajesInicio.Count; i++)
 		{
 			await page.EvaluateAsync($"window.scrollTo(0, {i * 76 + 700})");
 			Thread.Sleep(1000);
@@ -45,13 +45,13 @@ internal class Program
 	}
 	public static async Task AnadirPersonaje(IElementHandle personaje, IPage page, List<Estadisticas> personajes)
 	{
-		Thread.Sleep(1000);
+		Thread.Sleep(1500);
 		await personaje.ClickAsync();
-		Thread.Sleep(1000);
+		Thread.Sleep(1500);
 
 		IReadOnlyList<IElementHandle> elementoBotonStats = await page.QuerySelectorAllAsync(".text-xs.font-bold");//entrar en stats
 		await elementoBotonStats[0].ClickAsync();
-		Thread.Sleep(1000);
+		Thread.Sleep(1500);
 
 		IElementHandle elementoNombre = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre 
         string nombre = await elementoNombre.InnerTextAsync();
