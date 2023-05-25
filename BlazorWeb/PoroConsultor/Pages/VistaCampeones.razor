@@ -1,30 +1,37 @@
 ﻿@page "/campeones"
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime
 
-
-@if (orden)
+@if (campeones == null)
 {
-	<input id="desciende" type="checkbox" @bind="orden" />
-	<label for="desciende"><img class="orden" src="/Recursos/imagenes/asciende.png" /></label>
+	<div id="app">
+		<svg class="loading-progress">
+			<circle r="20%" cx="30%" cy="50%" />
+			<circle r="20%" cx="30%" cy="50%" />
+		</svg>
+	</div>
 }
 else
 {
-	<input id="asciende" type="checkbox" @bind="orden" />
-	<label for="asciende"><img class="orden" src="/Recursos/imagenes/desciende.png" /></label>
-}
+	<input id="buscador" type="text" placeholder="Buscar..." @bind="@terminoBusqueda" @oninput="Buscar" />
 
-
-<div class="container">
-
-	@if (campeones == null)
+	@if (orden)
 	{
-		<p>Loading...</p>
+		<input id="desciende" type="checkbox" @bind="orden" />
+		<label for="desciende"><img class="orden" src="/Recursos/imagenes/asciende.png" /></label>
 	}
 	else
 	{
-		@if (orden)
+		<input id="asciende" type="checkbox" @bind="orden" />
+		<label for="asciende"><img class="orden" src="/Recursos/imagenes/desciende.png" /></label>
+	}
+
+	<div class="container">
+
+
+		@if (resultadosBusqueda.Count > 0 && terminoBusqueda != "" || terminoBusquedaBool)
 		{
-			@foreach (var campeon in campeonesPaginadosAlreves)
+			@foreach (var campeon in resultadosBusqueda)
 			{
 				<button class="item">
 					<img class="img" src="@campeon.ImagenPrincipal">
@@ -34,24 +41,38 @@ else
 		}
 		else
 		{
-			@foreach (var campeon in campeonesPaginados)
+			@if (orden)
 			{
-				<button class="item">
-					<img class="img" src="@campeon.ImagenPrincipal">
-					<p>@campeon.Nombre</p>
-				</button>
+				@foreach (var campeon in campeonesPaginadosAlreves)
+				{
+					<button class="item">
+						<img class="img" src="@campeon.ImagenPrincipal">
+						<p>@campeon.Nombre</p>
+					</button>
+				}
+			}
+			else
+			{
+				@foreach (var campeon in campeonesPaginados)
+				{
+					<button class="item">
+						<img class="img" src="@campeon.ImagenPrincipal">
+						<p>@campeon.Nombre</p>
+					</button>
+				}
 			}
 		}
 
+	</div>
+	@if (!terminoBusquedaBool)
+	{
+		<div class="paginado">
+			<button class="botonPaginado" @onclick="IrPaginaAnterior">Anterior</button>
+			<p class="botonPaginado">@numeroPagina</p>
+			<button class="botonPaginado" @onclick="IrPaginaSiguiente">Siguiente</button>
+		</div>
 	}
-
-</div>
-
-<div class="paginado">
-	<button class="botonPaginado" @onclick="IrPaginaAnterior">Anterior</button>
-	<p class="botonPaginado">@numeroPagina</p>
-	<button class="botonPaginado" @onclick="IrPaginaSiguiente">Siguiente</button>
-</div>
+}
 
 @code {
 	List<Campeones> campeonesPaginados = new List<Campeones>();
@@ -59,18 +80,13 @@ else
 	int numeroPagina = 1;
 	int elementosPorPagina = 50;
 
-
 	private bool orden;
 	private List<Campeones> campeonesAlreves = new List<Campeones>();
 	private List<Campeones> campeones;
 
 	private string terminoBusqueda = "";
-	List<Campeones> resultadosBusqueda;
-
-	void Buscar()
-	{
-		resultadosBusqueda = campeones.Where(campeon => campeon.Nombre.Contains(terminoBusqueda)).ToList();
-	}
+	private bool terminoBusquedaBool;
+	List<Campeones> resultadosBusqueda = new List<Campeones>();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -79,6 +95,26 @@ else
 		await PaginarCampeones();
 		await CrearListaAlreves();
 		await PaginarCampeonesAlreves();
+	}
+
+	private async Task ScrollToTop()
+	{
+		await JSRuntime.InvokeVoidAsync("scrollToTop");
+	}
+
+	private Task Buscar(ChangeEventArgs e)
+	{
+		terminoBusqueda = e.Value.ToString();
+		resultadosBusqueda = campeones.Where(campeon => campeon.Nombre.Contains(terminoBusqueda, StringComparison.OrdinalIgnoreCase)).ToList();
+		if (terminoBusqueda != "")
+		{
+			terminoBusquedaBool = true;
+		}
+		else
+		{
+			terminoBusquedaBool = false;
+		}
+		return Task.CompletedTask;
 	}
 
 	private Task CrearListaAlreves()
@@ -109,6 +145,7 @@ else
 			PaginarCampeones();
 			PaginarCampeonesAlreves();
 		}
+		ScrollToTop();
 	}
 
 	private void IrPaginaSiguiente()
@@ -118,8 +155,8 @@ else
 			numeroPagina++;
 			PaginarCampeones();
 			PaginarCampeonesAlreves();
-
 		}
+		ScrollToTop();
 	}
 
 }

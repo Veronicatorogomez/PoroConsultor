@@ -8,9 +8,9 @@
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
-    width: 90%;
+    width: 95%;
     margin: auto;
-    margin-top:80px;/* para meter los filtros y buscador */
+    margin-top:30px;/* para meter los filtros y buscador */
     margin-bottom:50px;
 }
 
@@ -89,12 +89,12 @@ button.botonPaginado {
     background-color: black;
     box-shadow: 0 0 10px 1px black;
     width:81px;
-    transition: 0.5s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
     button.botonPaginado:hover {
         width:90px;
         box-shadow: 0 0 20px 2px black;
-        transition: 0.5s ease-in-out;
+        transition: 0.3s ease-in-out;
     }
 p.botonPaginado {
     color: black;
@@ -107,4 +107,9 @@ p.botonPaginado {
     margin-top:80px;
     margin-bottom:80px;
 
+}
+
+#buscador{
+    margin-top:50px;
+    margin-left:13%;
 }
