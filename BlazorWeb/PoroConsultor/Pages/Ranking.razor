@@ -1,7 +1,269 @@
 ﻿@page "/ranking"
+@inject HttpClient Http
 
-<h3>Ranking</h3>
+
+<PageTitle>Ranking</PageTitle>
+<div id="rollYcaracteristica">
+	<div class="roll">
+		<p>ROLL</p>
+		<select @bind="@opcionSeleccionada" name="transporte">
+			@foreach (var item in opciones)
+			{
+				<option>@item</option>
+			}
+		</select>
+	</div>
+
+	<div class="caracteristica">
+		<p>CARACTERISTICA</p>
+		<select @bind="@statSeleccionada" name="transporte">
+			@foreach (var item in stats)
+			{
+				<option>@item</option>
+			}
+		</select>
+	</div>
+</div>
+<button id="btnGrafico" @onclick="Filtrar">ELEGIR RANKING</button>
+
+
+@if (filtradosValor != null)
+{
+
+	<div class="container">
+		@for (int i = 0; i < filtradosValor[0].Count; i++)
+		{
+			int alturaMax = filtradosValor[0][0];
+			<div class="bar" style="height:@((int)(((double)filtradosValor[0][i] / (double)alturaMax)*100))%;"> @(i + 1)º<br>@filtradosValor[0][i] </div>
+		}
+	</div>
+	@for (int i = 0; i < filtradosValor[0].Count; i++)
+	{
+		<button class="imagenesYtexto">
+			<img class="imagenes" src="@filtrados[0][i].ImagenPrincipal" />
+			<div>
+				<p class="posi"> @(i + 1)º</p>
+				<p class="nombre"> @filtrados[0][i].Nombre</p>
+				<p class="descripcion"> @filtrados[0][i].Descripcion</p>
+			</div>
+		</button>
+	}
+
+}
+else
+{
+	<p class="sinGrafico">NO HAY RANKING ELEGIDO</p>
+}
+
+
+
 
 @code {
+	private List<string> opciones = new List<string> { "Todos", "Asesinos", "Luchadores", "Magos", "Tiradores", "Tanques" };
+	private string opcionSeleccionada = string.Empty;
+	List<string> stats = new List<string> { "Vida", "Daño", "Armadura", "Velocidad", "Alcance", "Velocidad de Ataque" };
+	private string statSeleccionada = string.Empty;
+	private List<Estadisticas> campeonesStats;
+	private List<Campeones> campeonesInfo;
+	private List<Union> campeones = new List<Union>();
+	private List<List<int>> filtradosValor;
+	private List<List<Union>> filtrados;
 
+	protected override async Task OnInitializedAsync()
+	{
+		campeonesStats = await Http.GetFromJsonAsync<List<Estadisticas>>("apis/estadisticas.json");
+
+		campeonesInfo = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
+
+		foreach (var item in campeonesInfo)
+		{
+			foreach (var item2 in campeonesStats)
+			{
+				if (item.Nombre == item2.Nombre)
+				{
+					campeones.Add(new Union(item, item2));
+				}
+			}
+		}
+		//campeones = UnirListas(campeonesStats, campeonesInfo);
+	}
+
+	//public List<Union> UnirListas(List<Estadisticas> personajesStats, List<Campeones> personajes)
+	//{
+	//	var listaUnida = from a in personajes
+	//						join b in personajesStats on a.Nombre equals b.Nombre
+	//						select new
+	//						{
+	//							Nombre = a.Nombre,
+	//							Apodo = a.Apodo,
+	//							ImagenPrincipal = a.ImagenPrincipal,
+	//							Descripcion = a.Descripcion,
+	//							Rol = a.Rol,
+	//							Dificultad = a.Dificultad,
+	//							ImagenHabilidad = a.ImagenHabilidad,
+	//							TipoHabilidad = a.TipoHabilidad,
+	//							NombreHabilidad = a.NombreHabilidad,
+	//							DescripcionHabilidad = a.DescripcionHabilidad,
+	//							VideoHabilidad = a.VideoHabilidad,
+	//							IconoSkin = a.IconoSkin,
+	//							NombreSkin = a.NombreSkin,
+	//							ImagenSkin = a.ImagenSkin,
+	//							PorcentajeAD = b.PorcentajeAD,
+	//							PorcentajeAP = b.PorcentajeAP,
+	//							PorcentajeTD = b.PorcentajeTD,
+	//							Vida = b.Vida,
+	//							Mana = b.Mana,
+	//							Dano = b.Dano,
+	//							Armadura = b.Armadura,
+	//							ResistenciaMagica = b.ResistenciaMagica,
+	//							TipoEnergia = b.TipoEnergia,
+	//							VidaRegen = b.VidaRegen,
+	//							ManaRegen = b.ManaRegen,
+	//							Alcance = b.Alcance,
+	//							ProbabilidadCritico = b.ProbabilidadCritico,
+	//							Velocidad = b.Velocidad,
+	//							VelocidadDeAtaque = b.VelocidadDeAtaque
+	//						};
+	//	List<Union> listaUnidaFinal = listaUnida.Select(obj =>
+	//		new Union
+	//			{
+	//				Nombre = obj.Nombre,
+	//				Apodo = obj.Apodo,
+	//				ImagenPrincipal = obj.ImagenPrincipal,
+	//				Descripcion = obj.Descripcion,
+	//				Rol = obj.Rol,
+	//				Dificultad = obj.Dificultad,
+	//				ImagenHabilidad = obj.ImagenHabilidad,
+	//				TipoHabilidad = obj.TipoHabilidad,
+	//				NombreHabilidad = obj.NombreHabilidad,
+	//				DescripcionHabilidad = obj.DescripcionHabilidad,
+	//				VideoHabilidad = obj.VideoHabilidad,
+	//				IconoSkin = obj.IconoSkin,
+	//				NombreSkin = obj.NombreSkin,
+	//				ImagenSkin = obj.ImagenSkin,
+	//				PorcentajeAD = obj.PorcentajeAD,
+	//				PorcentajeAP = obj.PorcentajeAP,
+	//				PorcentajeTD = obj.PorcentajeTD,
+	//				Vida = obj.Vida,
+	//				Mana = obj.Mana,
+	//				Dano = obj.Dano,
+	//				Armadura = obj.Armadura,
+	//				ResistenciaMagica = obj.ResistenciaMagica,
+	//				TipoEnergia = obj.TipoEnergia,
+	//				VidaRegen = obj.VidaRegen,
+	//				ManaRegen = obj.ManaRegen,
+	//				Alcance = obj.Alcance,
+	//				ProbabilidadCritico = obj.ProbabilidadCritico,
+	//				Velocidad = obj.Velocidad,
+	//				VelocidadDeAtaque = obj.VelocidadDeAtaque
+	//			}).ToList();
+	//	return listaUnidaFinal;
+	//}
+
+
+	private void Filtrar()
+	{
+		filtrados = new List<List<Union>>();
+		filtradosValor = new List<List<int>>();
+		List<Union> campeonesFiltro = new List<Union>();
+		switch (opcionSeleccionada)
+		{
+			case "Todos":
+				campeonesFiltro = campeones;
+				break;
+			case "Asesinos":
+				campeonesFiltro = campeones.Where(champ => champ.Rol.Equals("ASESINO")).ToList();
+				break;
+			case "Luchadores":
+				campeonesFiltro = campeones.Where(champ => champ.Rol == "LUCHADOR").ToList();
+				break;
+			case "Magos":
+				campeonesFiltro = campeones.Where(champ => champ.Rol == "MAGO").ToList();
+				break;
+			case "Tiradores":
+				campeonesFiltro = campeones.Where(champ => champ.Rol == "TIRADOR").ToList();
+				break;
+			case "Tanques":
+				campeonesFiltro = campeones.Where(champ => champ.Rol == "TANQUE").ToList();
+				break;
+		}
+
+		switch (statSeleccionada)
+		{
+			case "Vida":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.Vida).CompareTo(int.Parse(a.Vida)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.Vida)).ToList());
+				break;
+			case "Daño":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.Dano).CompareTo(int.Parse(a.Dano)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.Dano)).ToList());
+				break;
+			case "Armadura":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.Armadura).CompareTo(int.Parse(a.Armadura)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.Armadura)).ToList());
+				break;
+			case "Velocidad":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.Velocidad).CompareTo(int.Parse(a.Velocidad)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.Velocidad)).ToList());
+				break;
+			case "Alcance":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.Alcance).CompareTo(int.Parse(a.Alcance)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.Alcance)).ToList());
+				break;
+			case "Velocidad de Ataque":
+				campeonesFiltro.Sort((a, b) => int.Parse(b.VelocidadDeAtaque).CompareTo(int.Parse(a.VelocidadDeAtaque)));
+				filtrados.Add(campeonesFiltro.Take(10).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.VelocidadDeAtaque.Replace(".", ""))).ToList());
+				break;
+		}
+
+
+
+	}
+
+	//private void CrearTabla(List<Union> campeonesFiltro)
+	//{
+	//	// Ordena la lista de objetos por la Vida de mayor a menor
+
+
+	//	// Calcula la altura máxima del gráfico
+	//	int alturaMaxima = primeros10Objetos.Max(objeto => int.Parse(objeto.Vida));
+
+	//	// Calcula la anchura de cada barra
+	//	int anchoBarra = 30;
+
+	//	// Calcula el espacio entre cada barra
+	//	int espacioEntreBarras = 10;
+
+	//	// Calcula la posición inicial de la primera barra
+	//	int posicionInicialX = 50;
+	//	int posicionInicialY = 350;
+
+	//	List<int> posicionesX = new List<int>();
+	//	List<int> posicionesY = new List<int>();
+	//	List<int> alturas = new List<int>();
+
+	//	// Dibuja las barras en el gráfico
+	//	for (var i = 0; i < primeros10Objetos.Count; i++)
+	//	{
+	//		var objeto = primeros10Objetos[i];
+
+	//		// Calcula la altura de la barra proporcional a la Vida del objeto
+	//		int alturaBarra = (int)((int.Parse(objeto.Vida) / (double)alturaMaxima) * 300);
+	//		alturas.Add(alturaBarra);
+
+	//		// Calcula la posición de la barra en el eje X
+	//		posicionesX.Add(posicionInicialX + (i * (anchoBarra + espacioEntreBarras)));
+
+	//		// Calcula la posición de la barra en el eje Y
+	//		posicionesY.Add(posicionInicialY - alturaBarra);
+
+
+	//	}
+	//}
 }

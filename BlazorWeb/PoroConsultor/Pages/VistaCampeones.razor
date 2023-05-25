@@ -2,12 +2,14 @@
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
 
+<PageTitle>Campeones</PageTitle>
+
 @if (campeones == null)
 {
 	<div id="app">
 		<svg class="loading-progress">
-			<circle r="20%" cx="30%" cy="50%" />
-			<circle r="20%" cx="30%" cy="50%" />
+			<circle r="40%" cx="50%" cy="50%" />
+			<circle r="40%" cx="50%" cy="50%" />
 		</svg>
 	</div>
 }
@@ -15,16 +17,22 @@ else
 {
 	<input id="buscador" type="text" placeholder="Buscar..." @bind="@terminoBusqueda" @oninput="Buscar" />
 
-	@if (orden)
+	@if (!terminoBusquedaBool)
 	{
-		<input id="desciende" type="checkbox" @bind="orden" />
-		<label for="desciende"><img class="orden" src="/Recursos/imagenes/asciende.png" /></label>
+		<button id="bajarPagina" @onclick="GoDown">Bajar</button>
+		@if (orden)
+		{
+			<input id="desciende" type="checkbox" @bind="orden" />
+			<label for="desciende"><img class="orden" src="/Recursos/imagenes/asciende.png" @onclick="resetPagina" /></label>
+		}
+		else
+		{
+			<input id="asciende" type="checkbox" @bind="orden" />
+			<label for="asciende"><img class="orden" src="/Recursos/imagenes/desciende.png" @onclick="resetPagina" /></label>
+		}
 	}
-	else
-	{
-		<input id="asciende" type="checkbox" @bind="orden" />
-		<label for="asciende"><img class="orden" src="/Recursos/imagenes/desciende.png" /></label>
-	}
+
+	
 
 	<div class="container">
 
@@ -67,9 +75,9 @@ else
 	@if (!terminoBusquedaBool)
 	{
 		<div class="paginado">
-			<button class="botonPaginado" @onclick="IrPaginaAnterior">Anterior</button>
+			<button class="botonPaginado" @onclick="IrPaginaAnterior"><img class="flechitas" src="./Recursos/imagenes/flechaIzq.png"/></button>
 			<p class="botonPaginado">@numeroPagina</p>
-			<button class="botonPaginado" @onclick="IrPaginaSiguiente">Siguiente</button>
+			<button class="botonPaginado" @onclick="IrPaginaSiguiente"><img class="flechitas" src="./Recursos/imagenes/flechaDerecha.png" /></button>
 		</div>
 	}
 }
@@ -87,6 +95,7 @@ else
 	private string terminoBusqueda = "";
 	private bool terminoBusquedaBool;
 	List<Campeones> resultadosBusqueda = new List<Campeones>();
+	private IJSObjectReference jsModule;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -99,7 +108,21 @@ else
 
 	private async Task ScrollToTop()
 	{
-		await JSRuntime.InvokeVoidAsync("scrollToTop");
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import","./js/VistaCampeones.js");
+		await jsModule.InvokeVoidAsync("goUp");
+	}
+
+	private async Task GoDown()
+	{
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/VistaCampeones.js");
+		await jsModule.InvokeVoidAsync("goDown");
+	}
+
+	private void resetPagina()
+	{
+		numeroPagina = 1;
+		PaginarCampeones();
+		PaginarCampeonesAlreves();
 	}
 
 	private Task Buscar(ChangeEventArgs e)
@@ -144,8 +167,8 @@ else
 			numeroPagina--;
 			PaginarCampeones();
 			PaginarCampeonesAlreves();
+			ScrollToTop();
 		}
-		ScrollToTop();
 	}
 
 	private void IrPaginaSiguiente()
@@ -155,8 +178,8 @@ else
 			numeroPagina++;
 			PaginarCampeones();
 			PaginarCampeonesAlreves();
+			ScrollToTop();
 		}
-		ScrollToTop();
 	}
 
 }

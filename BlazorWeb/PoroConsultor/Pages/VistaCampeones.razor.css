@@ -60,10 +60,10 @@ p {
 
 .orden {
     position: absolute;
-    top: 130px;
-    right: 50px;
-    width: 60px;
-    height: 60px;
+    top: 138px;
+    left:10%;
+    width: 50px;
+    height: 50px;
     padding: 10px;
     border-radius: 10px;
     transition: 0.3s ease-in-out;
@@ -83,33 +83,63 @@ p {
 }
 
 button.botonPaginado {
-    border-radius: 15px;
-    border: 2px solid white;
+    border-radius: 30px;
+    border: 2px solid black;
     color: white;
-    background-color: black;
-    box-shadow: 0 0 10px 1px black;
-    width:81px;
-    transition: 0.3s ease-in-out;
+    margin: 3px 3px 0 0;
+    padding: 10px;
+    background-image: linear-gradient(to right,rgb(110, 110, 110),white,rgb(110, 110, 110));
+    box-shadow: 3.5px 3.5px 0 0 black;
+    transition: 0.1s ease-in-out;
 }
     button.botonPaginado:hover {
-        width:90px;
-        box-shadow: 0 0 20px 2px black;
-        transition: 0.3s ease-in-out;
+        margin:0;
+        box-shadow: 1px 1px 0 0 black;
+        transition: 0.1s ease-in-out;
     }
 p.botonPaginado {
     color: black;
     margin: 10px;
     
 }
+.flechitas {
+    width: 25px
+}
 
-.paginado{
-    text-align:center;
-    margin-top:80px;
-    margin-bottom:80px;
-
+.paginado {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 #buscador{
     margin-top:50px;
     margin-left:13%;
 }
+
+@media (max-width:800px){
+    #buscador {
+        margin-left: 18%;
+    }
+}
+
+#bajarPagina {
+    position: absolute;
+    top: 138px;
+    right: 50px;
+    padding: 5px 10px 5px 10px;
+    background-image: linear-gradient(to right,gold,white,gold);
+    font-weight: bold;
+    color: darkgoldenrod;
+    border: 2px solid darkgoldenrod;
+    border-radius: 25px;
+    box-shadow: 3px 3px 0 0px darkgoldenrod;
+    transition: 0.2s ease-in-out;
+}
+    #bajarPagina:hover {
+        top: 140px;
+        right: 48px;
+        box-shadow: 1px 1px 0 0px darkgoldenrod;
+        transition: 0.2s ease-in-out;
+    }
+

@@ -56,7 +56,7 @@ internal class Program
 		IElementHandle elementoNombre = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre 
         string nombre = await elementoNombre.InnerTextAsync();
 
-        IElementHandle elementoImagen = await page.QuerySelectorAsync("h2.tracking-tightish");//coge el nombre
+        IElementHandle elementoImagen = await page.QuerySelectorAsync(".h-20.rounded-lg");//coge el nombre
         string imagen = await elementoImagen.GetAttributeAsync("src");
 
         Random random = new Random();
@@ -88,7 +88,7 @@ internal class Program
 		string alcance = await elementoVida[8].InnerTextAsync();
 		string probCritico = await elementoVida[9].InnerTextAsync();
 		string velocidad = await elementoVida[10].InnerTextAsync();
-		string velocidadAtaque = await elementoVida[10].InnerTextAsync();
+		string velocidadAtaque = await elementoVida[11].InnerTextAsync();
 
 		double adF = double.Parse(ad.Replace("px", "").Replace(".", ","));//error
 		double apF = double.Parse(ap.Replace("px", "").Replace(".", ","));
@@ -100,21 +100,21 @@ internal class Program
 		{
 			Nombre = nombre,
 			Imagen = imagen,
-			PorcentajeAD = Convert.ToString(((int)adF / suma) * 100),//calcula el porcentaje en base a los demas
-			PorcentajeAP = Convert.ToString(((int)apF / suma) * 100),
-			PorcentajeTD = Convert.ToString(((int)tdF / suma) * 100),
-			Vida = vida.Split('-')[0],// coge solo el primer dato es decir el base
-			Mana = mana.Split('-')[0],
-			Dano = dano.Split('-')[0],
-			Armadura = armadura.Split('-')[0],
-			ResistenciaMagica = resistenciaMagica.Split('-')[0],
-			TipoEnergia = tipoEnergia.Split('-')[0],
-			VidaRegen = vidaRegen.Split('-')[0],
-			ManaRegen = manaRegen.Split('-')[0],
-			Alcance = alcance.Split('-')[0],
-			ProbabilidadCritico = probCritico.Split('-')[0],
-			Velocidad = velocidad.Split('-')[0],
-			VelocidadDeAtaque = velocidadAtaque.Split('-')[0]
+			PorcentajeAD = Convert.ToString((adF / suma) * 100),//calcula el porcentaje en base a los demas
+			PorcentajeAP = Convert.ToString((apF / suma) * 100),
+			PorcentajeTD = Convert.ToString((tdF / suma) * 100),
+			Vida = vida.Split(' ')[0],// coge solo el primer dato es decir el base
+			Mana = mana.Split(' ')[0],
+			Dano = dano.Split(' ')[0],
+			Armadura = armadura.Split(' ')[0],
+			ResistenciaMagica = resistenciaMagica.Split(' ')[0],
+			TipoEnergia = tipoEnergia.Split(' ')[0],
+			VidaRegen = vidaRegen.Split(' ')[0],
+			ManaRegen = manaRegen.Split(' ')[0],
+			Alcance = alcance.Split(' ')[0],
+			ProbabilidadCritico = probCritico.Split(' ')[0],
+			Velocidad = velocidad.Split(' ')[0],
+			VelocidadDeAtaque = velocidadAtaque.Split(' ')[0]
 		});
 
 
