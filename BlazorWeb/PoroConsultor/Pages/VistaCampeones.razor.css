@@ -78,13 +78,33 @@ p {
     all:unset;
 }
 
+.botonPaginado {
+    display: inline-block;
+}
+
+button.botonPaginado {
+    border-radius: 15px;
+    border: 2px solid white;
+    color: white;
+    background-color: black;
+    box-shadow: 0 0 10px 1px black;
+    width:81px;
+    transition: 0.5s ease-in-out;
+}
+    button.botonPaginado:hover {
+        width:90px;
+        box-shadow: 0 0 20px 2px black;
+        transition: 0.5s ease-in-out;
+    }
+p.botonPaginado {
+    color: black;
+    margin: 10px;
+    
+}
+
 .paginado{
-    display:inline-block;
-}
+    text-align:center;
+    margin-top:80px;
+    margin-bottom:80px;
 
-button.paginado{
-
-}
-p.paginado{
-    color:black;
 }

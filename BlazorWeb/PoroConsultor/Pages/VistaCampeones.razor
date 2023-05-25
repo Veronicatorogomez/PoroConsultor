@@ -41,20 +41,19 @@ else
 					<p>@campeon.Nombre</p>
 				</button>
 			}
-			
 		}
 
 	}
 
 </div>
 
-<button class="paginado" @onclick="IrPaginaAnterior">Anterior</button>
-<p class="paginado">@numeroPagina</p>
-<button class="paginado" @onclick="IrPaginaSiguiente">Siguiente</button>
-
+<div class="paginado">
+	<button class="botonPaginado" @onclick="IrPaginaAnterior">Anterior</button>
+	<p class="botonPaginado">@numeroPagina</p>
+	<button class="botonPaginado" @onclick="IrPaginaSiguiente">Siguiente</button>
+</div>
 
 @code {
-
 	List<Campeones> campeonesPaginados = new List<Campeones>();
 	List<Campeones> campeonesPaginadosAlreves = new List<Campeones>();
 	int numeroPagina = 1;
@@ -62,17 +61,35 @@ else
 
 
 	private bool orden;
-	private List<Campeones?> campeones;
+	private List<Campeones> campeonesAlreves = new List<Campeones>();
+	private List<Campeones> campeones;
+
+	private string terminoBusqueda = "";
+	List<Campeones> resultadosBusqueda;
+
+	void Buscar()
+	{
+		resultadosBusqueda = campeones.Where(campeon => campeon.Nombre.Contains(terminoBusqueda)).ToList();
+	}
 
 	protected override async Task OnInitializedAsync()
 	{
 		campeones = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
-		
-		await PaginarCampeones();
 
+		await PaginarCampeones();
+		await CrearListaAlreves();
 		await PaginarCampeonesAlreves();
 	}
 
+	private Task CrearListaAlreves()
+	{
+		for (int i = campeones.Count - 1; i >= 0; i--)
+		{
+			campeonesAlreves.Add(campeones[i]);
+		}
+
+		return Task.CompletedTask;
+	}
 	private Task PaginarCampeones()
 	{
 		campeonesPaginados = campeones.Skip((numeroPagina - 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
@@ -80,19 +97,17 @@ else
 	}
 	private Task PaginarCampeonesAlreves()
 	{
-		//dar la vuelta con un for
-		//campeones.Reverse();
-		//campeonesPaginadosAlreves = campeones.Skip((numeroPagina + 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
-		//campeonesPaginadosAlreves.Reverse(); // Invierte la lista paginada para restaurar el orden original
+		campeonesPaginadosAlreves = campeonesAlreves.Skip((numeroPagina - 1) * elementosPorPagina).Take(elementosPorPagina).ToList();
 		return Task.CompletedTask;
 	}
 
 	private void IrPaginaAnterior()
 	{
-		if(numeroPagina != 1)
+		if (numeroPagina != 1)
 		{
 			numeroPagina--;
 			PaginarCampeones();
+			PaginarCampeonesAlreves();
 		}
 	}
 
@@ -102,7 +117,8 @@ else
 		{
 			numeroPagina++;
 			PaginarCampeones();
-			
+			PaginarCampeonesAlreves();
+
 		}
 	}
 
