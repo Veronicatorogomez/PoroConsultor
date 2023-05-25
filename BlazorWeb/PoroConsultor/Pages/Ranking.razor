@@ -218,7 +218,7 @@ else
 			case "Velocidad de Ataque":
 				campeonesFiltro.Sort((a, b) => int.Parse(b.VelocidadDeAtaque).CompareTo(int.Parse(a.VelocidadDeAtaque)));
 				filtrados.Add(campeonesFiltro.Take(10).ToList());
-				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.VelocidadDeAtaque.Replace(".", ""))).ToList());
+				filtradosValor.Add(campeonesFiltro.Take(10).Select(x => int.Parse(x.VelocidadDeAtaque)).ToList());
 				break;
 		}
 
