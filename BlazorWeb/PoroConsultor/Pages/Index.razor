@@ -1,8 +1,57 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
 <PageTitle>PoroConsultor</PageTitle>
 
-<h1>Hello, world!</h1>
+<img id="logoPrincipal" src="/Recursos/imagenes/logo.png" />
+<div class="contenedorDeTodo">
+    <video class="video" autoplay loop >
+        <source src="@video" type="video/mp4" />
+	</video>
+    <div class="contenedorTexto">
+        <div class="texto imagen">
+		    Nuestra finalidad es brindar una información detallada sobre los campeones de League of Legends y poder consultar cual se adapta mejor
+		    a tu modo de juego, compara cuál es mejor según las características que especifíques y un ranking actualizable.
+	    </div>
+    </div>
+    <div class="contenedor">
+        <img class="imagen"src="/Recursos/imagenes/placeHolder.png" />
+        </div>
+    <div class="contenedor">
+        <img class="imagen" src="/Recursos/imagenes/placeHolder.png" />
+    </div>
+    <div class="contenedor">
+        <img class="imagen" src="/Recursos/imagenes/placeHolder.png" />
+    </div>
+    <div class="contenedorTexto">
+        <div class="texto imagen">
+            Los datos han sido obtenidos de la página oficial de <a href="https://www.leagueoflegends.com/es-es/">League of Legends</a> y de <a href="https://leagueoflegends.fandom.com/wiki/List_of_champions/Base_statistics">LeagueofLegends.Fandom</a>.
+        </div>
+    </div>
+</div>
 
-Welcome to your new app.
+@code {
 
+    private string video = "./Recursos/video/videoLol.mp4";
+    private IJSObjectReference module;
+
+    protected override async Task OnInitializedAsync()
+    {
+        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+        await module.InvokeVoidAsync("checkScroll");
+
+    }
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+    //        await module.InvokeVoidAsync("cargarVideo");
+    //    }
+        
+
+    //}
+
+    
+}
+ 
