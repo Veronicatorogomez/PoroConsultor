@@ -6,9 +6,25 @@
 
 <img id="logoPrincipal" src="/Recursos/imagenes/logo.png" />
 <div class="contenedorDeTodo">
-    <video class="video" autoplay loop muted="muted">
+    <div id="alerta">
+                                BIENVENIDOS!!!!!!!<br />
+        Esta página web contiene elementos musicales.
+        <button id="alertaBoton" @onclick="CerrarAlerta">X</button>
+    </div>
+    <video class="video" autoplay loop >
         <source src="@video" type="video/mp4" />
 	</video>
+    <button id="botonDeSonido" @onclick="QuitarSonido">
+        @if (!audio)
+        {
+            <img class="imagenSonido" src="/Recursos/imagenes/on.png" />
+        }
+        else
+        {
+            <img class="imagenSonido" src="/Recursos/imagenes/mute.png" />
+        }
+
+    </button>
     <div class="contenedorTexto">
         <div class="texto imagen">
 		    Nuestra finalidad es brindar una información detallada sobre los campeones de League of Legends y poder consultar cual se adapta mejor
@@ -35,11 +51,14 @@
 
     private string video = "./Recursos/video/videoLol.mp4";
     private IJSObjectReference module;
+    private bool audio;
 
     protected override async Task OnInitializedAsync()
     {
         module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+        await module.InvokeVoidAsync("cargarAlerta");
         await module.InvokeVoidAsync("checkScroll");
+        Console.WriteLine("CACA");
 
     }
 
@@ -56,22 +75,41 @@
         NavigationManager.NavigateTo("/Ranking");
     }
 
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
-            //await module.InvokeVoidAsync("cargarVideo");
+            
         }
-
-
+       
     }
 
     protected override async Task OnParametersSetAsync()
     {
-        //await module.InvokeVoidAsync("cargarVideo");
+        //module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+        //await module.InvokeVoidAsync("checkScroll");
         await base.OnParametersSetAsync();
+
+    }
+
+    public async Task CerrarAlerta()
+    {
+        await module.InvokeVoidAsync("cerrarAlerta");
+    }
+
+    public async Task QuitarSonido()
+    {
+        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+        await module.InvokeVoidAsync("quitarSonido");
+        if (audio)
+        {
+            audio = false;
+        }
+        else
+        {
+            audio = true;
+        }
     }
 
 }

@@ -1,5 +1,6 @@
-﻿const imagenes = document.querySelectorAll(".imagen");
+﻿
 export function checkScroll() {
+    const imagenes = document.querySelectorAll(".imagen");
     let scrollTop = document.documentElement.scrollTop;
     for (let i = 0; i < imagenes.length; i++) {
         let alturaImagen = imagenes[i].offsetTop;
@@ -7,24 +8,40 @@ export function checkScroll() {
             imagenes[i].style.opacity = 1;
             imagenes[i].classList.add("mostrarDerecha");
         }
-      
     }
-    
 };
 window.addEventListener('scroll', checkScroll);
 
+const alerta = document.getElementById("alerta");
+export function cargarAlerta() {
 
-//window.addEventListener('DOMContentLoaded', function () {
-//    var video = document.getElementById('myVideo'); // Reemplaza 'myVideo' con el ID de tu elemento de video
-//});
-export function cargarVideo() {
+   
+    alerta.style.display = "block";
 
+}
 
+export function cerrarAlerta() {
+
+    const alerta = document.getElementById("alerta");
+    alerta.style.display = "none";
     const video = document.getElementsByTagName("video")[0];
     video.play();
-        //video.addEventListener('loadedmetadata', function () {
-        //    video.loop = true; // Establece la propiedad loop en true para que se reproduzca en bucle
-        //    video.play(); // Inicia la reproducción del video
-        //});
+
 }
+
+export function quitarSonido() {
+
+    const video = document.getElementsByTagName("video")[0];
+    if (video.muted == true) {
+        video.muted = false;
+    }
+    else {
+        video.muted = true;
+    }
+
+}
+
+
+
+
 
