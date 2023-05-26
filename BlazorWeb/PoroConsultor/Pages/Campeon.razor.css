@@ -1,18 +1,133 @@
 ﻿.gridContainer {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
 }
+
 
 .habilidades {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+ 
+
+h1 {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    -webkit-text-stroke: 3px black;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+
+.imagenPrincipal{
+    width:90%;
+    margin:0 40px 30px 40px;
+    box-shadow:0 0 15px 3px black;
+}
+.imagenRolDificultad {
+    margin-top:50px;
+    text-align: center;
+    margin-bottom: 140px;
+}
+.whiteText {
+    color: white !important;
+    font-weight:100;
+}
+.roll, .dificultad {
+    display: inline-block;
+    margin: 20px 50px 10px 50px;
+    color: aqua;
+    background-color: black;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 0 0 10px 2px black;
+    border:2px dashed aqua;
+    font-weight:bold;
+}
+
+.descripcion {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
 }
 
 
 .iconosHabilidades {
     display: grid;
     grid-template-columns: auto;
+    height:10px;
+
 }
+
+.botonImagenHabilidad {
+    height: 70px;
+    width: 70PX;
+    margin-top: 10px;
+    padding: 0;
+    margin-left:50%;
+}
+.imagenHabilidad {
+    height: 70px;
+    width: 70PX;
+    object-fit: cover;
+}
+.infoHabilidades {
+    margin-top: 80px;
+    grid-column: span 2;
+    margin-bottom:160px;
+}
+
+.nombreHabilidad {
+    font-weight: bold;
+    font-size:x-large;
+    text-decoration:underline;
+}
+.tipoHabilidad {
+    font-weight: bold;
+    font-size: large;
+}
+
+.video {
+    margin-top: 10px;
+    width: 90%;
+    display: block;
+    margin: 0 auto 0 auto;
+    box-shadow: 0 0 15px 5px black;
+}
+
+
+
 
 
 .skinGridContainer {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    margin-top:50px !important;
+    margin:auto;
+    width:80%;
+}
+
+.botonesIconosSkins {
+    height: 70px;
+    width: 70PX;
+    margin-top:20px;
+    padding:0;
+}
+.iconosSkins {
+    height: 70px;
+    width:70PX;
+    object-fit: cover;
+}
+
+.imagenSkin {
+    width: 70%;
+    box-shadow: 0 0 15px 5px black;
+    display: block;
+    margin: 0 auto 100px auto;
 }

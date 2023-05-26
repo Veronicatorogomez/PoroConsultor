@@ -1,5 +1,6 @@
 ﻿@page "/campeon/{parametro}"
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime
 
 @if (campeon != null)
 {
@@ -8,15 +9,15 @@
 
 	<div class="gridContainer">
 
+		<img class="imagenPrincipal" src="@campeon.ImagenSkin[0]">
 
-		<div class="imagenRolDificultad">
-			<img src="@campeon.ImagenSkin[0]">
-			<p class="roll">@campeon.Rol</p><p class="dificultad">@campeon.Dificultad</p>
-		</div>
-
-
-		<p class="descripcion">@campeon.Descripcion</p>
-
+		
+			<div class="imagenRolDificultad">
+				<p class="roll"><span class="whiteText">ROLL:</span><br>@campeon.Rol</p>
+				<p class="dificultad"><span class="whiteText">DIFICULTAD:</span><br>@campeon.Dificultad</p>
+				<p class="descripcion">@campeon.Descripcion</p>
+			</div>
+		
 
 		<div class="habilidades">
 
@@ -31,8 +32,8 @@
 			</div>
 
 			<div class="infoHabilidades">
-				<p>@campeon.NombreHabilidad[habilidad]</p>
-				<p>@campeon.TipoHabilidad[habilidad]</p>
+				<p class="nombreHabilidad">@campeon.NombreHabilidad[habilidad]</p>
+				<p class="tipoHabilidad">@campeon.TipoHabilidad[habilidad]</p>
 				<p>@campeon.DescripcionHabilidad[habilidad]</p>
 			</div>
 
@@ -40,8 +41,8 @@
 		</div>
 
 
-		<video autoplay loop>
-			<source src="@campeon.VideoHabilidad[habilidad]">
+		<video class="video" autoplay muted=true @onended="VideoBucle">
+			<source  class="srcVideo" src="@campeon.VideoHabilidad[habilidad]">
 		</video>
 
 
@@ -49,14 +50,15 @@
 
 
 	<div class="skinGridContainer">
-		@for(int i = 0; i < campeon.IconoSkin.Count; i++)
+		@for (int i = 0; i < campeon.IconoSkin.Count; i++)
 		{
-			<button @onclick="() => DameNumSkin(i)"><img src="@campeon.IconoSkin[i]"></button>
+			int numerito = i;
+			<button class="botonesIconosSkins" @onclick="() => DameNumSkin(numerito)"><img class="iconosSkins" src="@campeon.IconoSkin[i]"></button>
 		}
 	</div>
 
 	<h1>@campeon.NombreSkin[skin]</h1>
-	<img src="@campeon.ImagenSkin[skin]">
+	<img class="imagenSkin" src="@campeon.ImagenSkin[skin]">
 }
 else
 {
@@ -75,6 +77,7 @@ else
 	private List<Campeones> campeonesInfo;
 	private List<Union> campeones = new List<Union>();
 	private Union campeon;
+	private IJSObjectReference jsModule;
 	private int habilidad = 0;
 	private int skin = 0;
 
@@ -95,15 +98,22 @@ else
 			}
 		}
 		campeon = campeones.First(x => x.Nombre == parametro);
+
+
 	}
 
 	private void DameNum(int i)
 	{
 		habilidad = i;
-		
+
 	}
 	private void DameNumSkin(int i)
 	{
 		skin = i;
+	}
+	private async Task VideoBucle()
+	{
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
+		await jsModule.InvokeVoidAsync("playVideoBucle");
 	}
 }
