@@ -117,15 +117,29 @@ a.linkHeader {
         font-weight: bold;
     }
 
+@media (max-width:1100px) {
+    #alerta {
+        font-size: medium !important;
+        transition:1s;
+    }
+}
+
 @media (max-width:700px) {
     .texto {
         font-size: large !important;
     }
 
-    #logoPrincipal {
-        left: 30%;
-        width: 50%;
-        top: 700px;
-        transition: 0.5s;
+    #alerta {
+        font-size: small !important;
+        transition: 1s;
+        padding: 3% !important;
+    }
+}
+@media (max-width:500px) {
+    #alerta {
+        font-size: xx-small !important;
+        transition: 1s;
+        padding: 3% !important;
+        width: 50% !important;
     }
 }
