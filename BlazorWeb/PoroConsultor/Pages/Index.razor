@@ -6,7 +6,7 @@
 
 <img id="logoPrincipal" src="/Recursos/imagenes/logo.png" />
 <div class="contenedorDeTodo">
-    <video class="video" autoplay loop >
+    <video class="video" autoplay loop muted="muted">
         <source src="@video" type="video/mp4" />
 	</video>
     <div class="contenedorTexto">
@@ -57,16 +57,22 @@
     }
 
 
-    //protected override async Task OnAfterRenderAsync(bool firstRender)
-    //{
-    //    if (firstRender)
-    //    {
-    //        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
-    //        await module.InvokeVoidAsync("cargarVideo");
-    //    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+            //await module.InvokeVoidAsync("cargarVideo");
+        }
 
 
-    //}
-    
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        //await module.InvokeVoidAsync("cargarVideo");
+        await base.OnParametersSetAsync();
+    }
+
 }
  

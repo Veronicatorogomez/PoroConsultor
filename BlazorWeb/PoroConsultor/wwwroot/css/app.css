@@ -116,3 +116,16 @@ a.linkHeader {
         all: unset;
         font-weight: bold;
     }
+
+@media (max-width:700px) {
+    .texto {
+        font-size: large !important;
+    }
+
+    #logoPrincipal {
+        left: 30%;
+        width: 50%;
+        top: 700px;
+        transition: 0.5s;
+    }
+}

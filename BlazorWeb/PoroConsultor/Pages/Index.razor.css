@@ -75,16 +75,3 @@ button{
     all:unset;
 }
 
-@media screen (max-width:700px) {
-    .texto {
-        font-size: medium !important;
-    }
-    #logoPrincipal {
-        left: 30%;
-        width: 50%;
-        top: 700px;
-        transition: 0.5s;
-    }
-
-    
-}

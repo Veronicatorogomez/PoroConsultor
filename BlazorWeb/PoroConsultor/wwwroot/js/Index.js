@@ -13,16 +13,18 @@ export function checkScroll() {
 };
 window.addEventListener('scroll', checkScroll);
 
-/*const video = document.getElementByTagName("video")[0];*/
+
 //window.addEventListener('DOMContentLoaded', function () {
 //    var video = document.getElementById('myVideo'); // Reemplaza 'myVideo' con el ID de tu elemento de video
 //});
-//export function cargarVideo() {
-    
+export function cargarVideo() {
 
-//        video.addEventListener('loadedmetadata', function () {
-//            video.loop = true; // Establece la propiedad loop en true para que se reproduzca en bucle
-//            video.play(); // Inicia la reproducción del video
-//        });
-//}
+
+    const video = document.getElementsByTagName("video")[0];
+    video.play();
+        //video.addEventListener('loadedmetadata', function () {
+        //    video.loop = true; // Establece la propiedad loop en true para que se reproduzca en bucle
+        //    video.play(); // Inicia la reproducción del video
+        //});
+}
 

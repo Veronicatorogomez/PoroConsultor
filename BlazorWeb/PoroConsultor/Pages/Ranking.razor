@@ -41,7 +41,9 @@
 		</div>
 		@for (int i = 0; i < filtradosValor[0].Count; i++)
 		{
-			<button class="imagenesYtexto" @onclick="() => NavegaACampeon(filtrados[0][i].Nombre)"> @*NO SE PORQUE ESTO DA ERROR i SE SALE DEL ARRAY*@
+			int aux = i;
+			<button class="imagenesYtexto" @onclick="() => NavegaACampeon(filtrados[0][aux].Nombre)">
+				@*NO SE PORQUE ESTO DA ERROR i SE SALE DEL ARRAY*@
 				<img class="imagenes" src="@filtrados[0][i].ImagenPrincipal" />
 				<div>
 					<p class="posi"> @(i + 1)º</p>

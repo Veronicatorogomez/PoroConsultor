@@ -23,7 +23,8 @@
 			<div class="iconosHabilidades">
 				@for (int i = 0; i < campeon.ImagenHabilidad.Count; i++)
 				{
-					<button class="botonImagenHabilidad"  @onclick="() => DameNum(i)"><img class="imagenHabilidad" src="@campeon.ImagenHabilidad[i]"></button>
+					int numero = i;
+					<button class="botonImagenHabilidad" @onclick="() => DameNum(numero)"><img class="imagenHabilidad" src="@campeon.ImagenHabilidad[i]"></button>
 
 				}
 
@@ -99,6 +100,7 @@ else
 	private void DameNum(int i)
 	{
 		habilidad = i;
+		
 	}
 	private void DameNumSkin(int i)
 	{
