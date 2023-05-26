@@ -1,0 +1,42 @@
+﻿.contenedorSelects{
+    display:grid;
+    grid-template-columns:auto auto;
+    margin:50px auto 30px auto;
+    text-align:center;
+
+}
+
+#selector1 {
+    width: 30%;
+    height: 40px;
+    margin: auto 0% auto 45%;
+    text-align:center;
+}
+
+#selector2 {
+    width: 30%;
+    height: 40px;
+    margin: 20px 30% 20px;
+    text-align: center;
+}
+
+#boton{
+    margin:auto 60% auto 46%;
+    text-align:center;
+    width:100px;
+    height:100px;
+    border:solid 4px orange;
+    box-shadow:5px 3px 0 0 ;
+    border-radius:1000px;
+}
+#boton:hover{
+    box-shadow:1px 1px 0 0 orange;
+    margin:auto 59.5% auto 46.5%;
+}
+
+.vsImagen {
+    text-align: center;
+    width: 100%;
+    height: 90px;
+    border-radius: 1000px;
+}

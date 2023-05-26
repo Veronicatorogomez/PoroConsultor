@@ -1,14 +1,37 @@
 ﻿@page "/consultor"
 @inject HttpClient Http
 <PageTitle>Consultor</PageTitle>
-<select></select>
+@if(campeones.Count > 0)
+{
+	<div class="contenedorSelects">
+		<select id="selector1" @bind="nombre1">
+			@foreach (var campeon in campeones)
+			{
+				<option>@campeon.Nombre</option>
+			}
+		</select>
+
+		<select id="selector2" @bind="nombre2">
+			@foreach (var campeon in campeones)
+			{
+				<option>@campeon.Nombre</option>
+			}
+		</select>
+	</div>
+	<button id="boton">
+		<img class="vsImagen" src="/Recursos/imagenes/vs.png"/>
+	</button>
+}
 
 
 @code {
 	private List<Campeones> personajes;
 	private List<Estadisticas> estadisticas;
-	private List<Union> campeones= new List<Union> ();
-
+	private List<Union> campeones= new List<Union>();
+	private string nombre1 = string.Empty;
+	private string nombre2 = string.Empty;
+	private Union campeon1;
+	private Union campeon2;
 	protected override async Task OnInitializedAsync()
 	{
 		estadisticas = await Http.GetFromJsonAsync<List<Estadisticas>>("apis/estadisticas.json");
@@ -17,13 +40,14 @@
 		{
 			foreach(var item2 in estadisticas)
 			{
-				if(item.Nombre == item2.Nombre)
+				if(item.Nombre == item2.Nombre.TrimStart(' ').ToUpper())
 				{
 					campeones.Add(new Union(item,item2));
 				}
 			}
 		}
 	} 
+
 
 
 }
