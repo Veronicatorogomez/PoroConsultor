@@ -7,7 +7,7 @@
 <div id="rollYcaracteristica">
 	<div class="roll">
 		<p>ROLL</p>
-		<select @bind="@opcionSeleccionada" name="transporte">
+		<select @bind="@opcionSeleccionada">
 			@foreach (var item in opciones)
 			{
 				<option>@item</option>
@@ -17,7 +17,7 @@
 
 	<div class="caracteristica">
 		<p>CARACTERISTICA</p>
-		<select @bind="@statSeleccionada" name="transporte">
+		<select @bind="@statSeleccionada">
 			@foreach (var item in stats)
 			{
 				<option>@item</option>
@@ -30,26 +30,32 @@
 
 @if (filtradosValor != null)
 {
-
-	<div class="container">
+	@if (opcionSeleccionada != "" && statSeleccionada != "" && botonPulsado)
+	{
+		<div class="container">
+			@for (int i = 0; i < filtradosValor[0].Count; i++)
+			{
+				int alturaMax = filtradosValor[0][0];
+				<div class="bar" style="height:@((int)(((double)filtradosValor[0][i] / (double)alturaMax)*100))%;"> @(i + 1)º<br>@filtradosValor[0][i] </div>
+			}
+		</div>
 		@for (int i = 0; i < filtradosValor[0].Count; i++)
 		{
-			int alturaMax = filtradosValor[0][0];
-			<div class="bar" style="height:@((int)(((double)filtradosValor[0][i] / (double)alturaMax)*100))%;"> @(i + 1)º<br>@filtradosValor[0][i] </div>
+			<button class="imagenesYtexto" @onclick="() => NavegaACampeon(filtrados[0][i].Nombre)"> @*NO SE PORQUE ESTO DA ERROR i SE SALE DEL ARRAY*@
+				<img class="imagenes" src="@filtrados[0][i].ImagenPrincipal" />
+				<div>
+					<p class="posi"> @(i + 1)º</p>
+					<p class="nombre"> @filtrados[0][i].Nombre</p>
+					<p class="descripcion"> @filtrados[0][i].Descripcion</p>
+				</div>
+			</button>
 		}
-	</div>
-	@for (int i = 0; i < filtradosValor[0].Count; i++)
-	{
-		<button class="imagenesYtexto" @onclick="()=> NavegaACampeon(filtrados[0][i].Nombre)"> @*NO SE PORQUE ESTO DA ERROR i SE SALE DEL ARRAY*@
-			<img class="imagenes" src="@filtrados[0][i].ImagenPrincipal" />
-			<div>
-				<p class="posi"> @(i + 1)º</p>
-				<p class="nombre"> @filtrados[0][i].Nombre</p>
-				<p class="descripcion"> @filtrados[0][i].Descripcion</p>
-			</div>
-		</button>
 	}
-
+	else
+	{
+		<p class="alerta">Elige caracteristica y roll para comparar</p>
+		botonPulsado = false;
+	}
 }
 else
 {
@@ -69,6 +75,7 @@ else
 	private List<Union> campeones = new List<Union>();
 	private List<List<int>> filtradosValor;
 	private List<List<Union>> filtrados;
+	private bool botonPulsado;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -169,6 +176,7 @@ else
 
 	private void Filtrar()
 	{
+		botonPulsado = true;
 		filtrados = new List<List<Union>>();
 		filtradosValor = new List<List<int>>();
 		List<Union> campeonesFiltro = new List<Union>();

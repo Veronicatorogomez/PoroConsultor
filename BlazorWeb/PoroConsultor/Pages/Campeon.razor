@@ -1,9 +1,107 @@
 ﻿@page "/campeon/{parametro}"
+@inject HttpClient Http
+
+@if (campeon != null)
+{
+	<h1>@campeon.Nombre</h1>
+	<h2>@campeon.Apodo</h2>
+
+	<div class="gridContainer">
 
 
-<h3>Campeon</h3>
+		<div class="imagenRolDificultad">
+			<img src="@campeon.ImagenSkin[0]">
+			<p class="roll">@campeon.Rol</p><p class="dificultad">@campeon.Dificultad</p>
+		</div>
+
+
+		<p class="descripcion">@campeon.Descripcion</p>
+
+
+		<div class="habilidades">
+
+			<div class="iconosHabilidades">
+				@for (int i = 0; i < campeon.ImagenHabilidad.Count; i++)
+				{
+					<button class="botonImagenHabilidad"  @onclick="() => DameNum(i)"><img class="imagenHabilidad" src="@campeon.ImagenHabilidad[i]"></button>
+
+				}
+
+			</div>
+
+			<div class="infoHabilidades">
+				<p>@campeon.NombreHabilidad[habilidad]</p>
+				<p>@campeon.TipoHabilidad[habilidad]</p>
+				<p>@campeon.DescripcionHabilidad[habilidad]</p>
+			</div>
+
+
+		</div>
+
+
+		<video autoplay loop>
+			<source src="@campeon.VideoHabilidad[habilidad]">
+		</video>
+
+
+	</div>
+
+
+	<div class="skinGridContainer">
+		@for(int i = 0; i < campeon.IconoSkin.Count; i++)
+		{
+			<button @onclick="() => DameNumSkin(i)"><img src="@campeon.IconoSkin[i]"></button>
+		}
+	</div>
+
+	<h1>@campeon.NombreSkin[skin]</h1>
+	<img src="@campeon.ImagenSkin[skin]">
+}
+else
+{
+	<div id="app">
+		<svg class="loading-progress">
+			<circle r="40%" cx="50%" cy="50%" />
+			<circle r="40%" cx="50%" cy="50%" />
+		</svg>
+	</div>
+}
 
 @code {
 	[Parameter]
 	public string parametro { get; set; }
+	private List<Estadisticas> campeonesStats;
+	private List<Campeones> campeonesInfo;
+	private List<Union> campeones = new List<Union>();
+	private Union campeon;
+	private int habilidad = 0;
+	private int skin = 0;
+
+	protected override async Task OnInitializedAsync()
+	{
+		campeonesStats = await Http.GetFromJsonAsync<List<Estadisticas>>("apis/estadisticas.json");
+
+		campeonesInfo = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
+
+		foreach (var item in campeonesInfo)
+		{
+			foreach (var item2 in campeonesStats)
+			{
+				if (item.Nombre == item2.Nombre.TrimStart(' ').ToUpper())
+				{
+					campeones.Add(new Union(item, item2));
+				}
+			}
+		}
+		campeon = campeones.First(x => x.Nombre == parametro);
+	}
+
+	private void DameNum(int i)
+	{
+		habilidad = i;
+	}
+	private void DameNumSkin(int i)
+	{
+		skin = i;
+	}
 }

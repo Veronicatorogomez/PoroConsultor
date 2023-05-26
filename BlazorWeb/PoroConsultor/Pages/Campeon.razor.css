@@ -1,0 +1,18 @@
+﻿.gridContainer {
+    display: grid;
+}
+
+.habilidades {
+    display: grid;
+}
+
+
+.iconosHabilidades {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+
+.skinGridContainer {
+    display: grid;
+}

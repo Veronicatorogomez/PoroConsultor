@@ -156,3 +156,19 @@
         padding:10px;
         border-radius:15px;
     }
+
+.alerta{
+    position:absolute;
+    color:red;
+    background-color:white;
+    border:2px solid red;
+    padding:30px;
+    border-radius:15px;
+    width:30%;
+    top:50%;
+    left:30%;
+    min-width:200px;
+    text-align:center;
+    font-weight: bold;
+
+}
