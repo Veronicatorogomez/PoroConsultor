@@ -7,6 +7,7 @@ export function checkScroll() {
             imagenes[i].style.opacity = 1;
             imagenes[i].classList.add("mostrarDerecha");
         }
+      
     }
     
 };

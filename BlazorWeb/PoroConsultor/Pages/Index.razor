@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 <PageTitle>PoroConsultor</PageTitle>
 
@@ -14,15 +15,15 @@
 		    a tu modo de juego, compara cuál es mejor según las características que especifíques y un ranking actualizable.
 	    </div>
     </div>
-    <div class="contenedor">
-        <img class="imagen"src="/Recursos/imagenes/placeHolder.png" />
-        </div>
-    <div class="contenedor">
-        <img class="imagen" src="/Recursos/imagenes/placeHolder.png" />
-    </div>
-    <div class="contenedor">
-        <img class="imagen" src="/Recursos/imagenes/placeHolder.png" />
-    </div>
+    <button class="contenedor" @onclick="Redirigir1">
+        <img class="imagen" src="/Recursos/imagenes/Img1.png" />
+        </button>
+    <button class="contenedor" @onclick="Redirigir2">
+        <img class="imagen" src="/Recursos/imagenes/Img2.png" />
+    </button>
+    <button class="contenedor" @onclick="Redirigir3">
+        <img class="imagen" src="/Recursos/imagenes/Img3.png" />
+    </button>
     <div class="contenedorTexto">
         <div class="texto imagen">
             Los datos han sido obtenidos de la página oficial de <a href="https://www.leagueoflegends.com/es-es/">League of Legends</a> y de <a href="https://leagueoflegends.fandom.com/wiki/List_of_champions/Base_statistics">LeagueofLegends.Fandom</a>.
@@ -41,6 +42,31 @@
         await module.InvokeVoidAsync("checkScroll");
 
     }
+
+
+
+
+
+
+
+
+
+    
+
+    public void Redirigir1()
+    {
+        NavigationManager.NavigateTo("/campeones");
+    }
+    public void Redirigir2()
+    {
+        NavigationManager.NavigateTo("/Consultor");
+    }
+    public void Redirigir3()
+    {
+        NavigationManager.NavigateTo("/Ranking");
+    }
+
+
     //protected override async Task OnAfterRenderAsync(bool firstRender)
     //{
     //    if (firstRender)
@@ -48,10 +74,9 @@
     //        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
     //        await module.InvokeVoidAsync("cargarVideo");
     //    }
-        
+
 
     //}
-
     
 }
  

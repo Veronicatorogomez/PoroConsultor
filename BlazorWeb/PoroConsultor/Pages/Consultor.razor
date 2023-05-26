@@ -1,7 +1,29 @@
 ﻿@page "/consultor"
+@inject HttpClient Http
+<PageTitle>Consultor</PageTitle>
+<select></select>
 
-<h3>Consultor</h3>
 
 @code {
+	private List<Campeones> personajes;
+	private List<Estadisticas> estadisticas;
+	private List<Union> campeones= new List<Union> ();
+
+	protected override async Task OnInitializedAsync()
+	{
+		estadisticas = await Http.GetFromJsonAsync<List<Estadisticas>>("apis/estadisticas.json");
+		personajes = await Http.GetFromJsonAsync<List<Campeones>>("apis/campeones.json");
+		foreach (var item in personajes)
+		{
+			foreach(var item2 in estadisticas)
+			{
+				if(item.Nombre == item2.Nombre)
+				{
+					campeones.Add(new Union(item,item2));
+				}
+			}
+		}
+	} 
+
 
 }
