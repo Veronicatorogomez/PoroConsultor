@@ -1,5 +1,6 @@
 ﻿@page "/ranking"
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 
 
 <PageTitle>Ranking</PageTitle>
@@ -39,7 +40,7 @@
 	</div>
 	@for (int i = 0; i < filtradosValor[0].Count; i++)
 	{
-		<button class="imagenesYtexto">
+		<button class="imagenesYtexto" @onclick="()=> NavegaACampeon(filtrados[0][i].Nombre)"> @*NO SE PORQUE ESTO DA ERROR i SE SALE DEL ARRAY*@
 			<img class="imagenes" src="@filtrados[0][i].ImagenPrincipal" />
 			<div>
 				<p class="posi"> @(i + 1)º</p>
@@ -79,13 +80,18 @@ else
 		{
 			foreach (var item2 in campeonesStats)
 			{
-				if (item.Nombre == item2.Nombre)
+				if (item.Nombre == item2.Nombre.TrimStart(' ').ToUpper())
 				{
 					campeones.Add(new Union(item, item2));
 				}
 			}
 		}
 		//campeones = UnirListas(campeonesStats, campeonesInfo);
+	}
+
+	private void NavegaACampeon(string campeon)
+	{
+		NavigationManager.NavigateTo($"/campeon/{campeon}");
 	}
 
 	//public List<Union> UnirListas(List<Estadisticas> personajesStats, List<Campeones> personajes)

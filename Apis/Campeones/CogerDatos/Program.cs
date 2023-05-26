@@ -48,8 +48,10 @@ internal class Program
         string nombre = await elementoNombre[1].InnerTextAsync();//coge su nombre oficial
         string apodo = await elementoNombre[0].InnerTextAsync();//coge su apodo, o como lo llaman
 
+		IElementHandle elementoVerMasDescripcion = await page.QuerySelectorAsync(".style__Desc-sc-8gkpub-9 button");
+		await elementoVerMasDescripcion.ClickAsync();//hace click en ver mas para coger la descripcion entera
 
-        IElementHandle elementoDescripcion = await page.QuerySelectorAsync(".style__Desc-sc-8gkpub-9");
+		IElementHandle elementoDescripcion = await page.QuerySelectorAsync(".style__Desc-sc-8gkpub-9 p");
         string descripcion = await elementoDescripcion.InnerTextAsync();//coge descripcion personahe
 
         IReadOnlyList<IElementHandle> elementoRolDificultad = await page.QuerySelectorAllAsync(".style__SpecsItemValue-sc-8gkpub-15");

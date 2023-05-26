@@ -1,6 +1,7 @@
 ﻿@page "/campeones"
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 <PageTitle>Campeones</PageTitle>
 
@@ -41,7 +42,7 @@ else
 		{
 			@foreach (var campeon in resultadosBusqueda)
 			{
-				<button class="item">
+				<button class="item" @onclick=" ()=> NavegaACampeon(campeon.Nombre)">
 					<img class="img" src="@campeon.ImagenPrincipal">
 					<p>@campeon.Nombre</p>
 				</button>
@@ -53,7 +54,7 @@ else
 			{
 				@foreach (var campeon in campeonesPaginadosAlreves)
 				{
-					<button class="item">
+					<button class="item" @onclick=" ()=> NavegaACampeon(campeon.Nombre)">
 						<img class="img" src="@campeon.ImagenPrincipal">
 						<p>@campeon.Nombre</p>
 					</button>
@@ -63,7 +64,7 @@ else
 			{
 				@foreach (var campeon in campeonesPaginados)
 				{
-					<button class="item">
+					<button class="item" @onclick=" ()=> NavegaACampeon(campeon.Nombre)">
 						<img class="img" src="@campeon.ImagenPrincipal">
 						<p>@campeon.Nombre</p>
 					</button>
@@ -104,6 +105,11 @@ else
 		await PaginarCampeones();
 		await CrearListaAlreves();
 		await PaginarCampeonesAlreves();
+	}
+
+	private void NavegaACampeon(string campeon)
+	{
+		NavigationManager.NavigateTo($"/campeon/{campeon}");
 	}
 
 	private async Task ScrollToTop()

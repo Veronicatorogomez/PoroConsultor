@@ -1,7 +1,9 @@
-﻿@page "/campeon"
+﻿@page "/campeon/{parametro}"
 
 
 <h3>Campeon</h3>
 
 @code {
+	[Parameter]
+	public string parametro { get; set; }
 }

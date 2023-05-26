@@ -4,13 +4,13 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    background: darkgrey;
+    background: #C9C9C9;
     padding: 20px 3% 0 3%;
     border-left: 10px solid black;
     border-bottom: 5px solid black;
-    border-radius: 0 40px 0 0;
+    border-radius: 0 20px 0 0;
     box-shadow: 0 0 5px 2px black;
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 .bar {
@@ -94,7 +94,7 @@
 #btnGrafico {
     position: absolute;
     top: 248px;
-    left: 45%;
+    left: 42%;
     padding: 5px 10px 5px 10px;
     background-image: linear-gradient(to right,gold,white,gold);
     font-weight: bold;
@@ -106,7 +106,7 @@
 }
     #btnGrafico:hover {
         top: 250px;
-        left: 45.3%;
+        left: 42.3%;
         box-shadow: 1px 1px 0 0px darkgoldenrod;
         transition: 0.2s ease-in-out;
     }
@@ -122,16 +122,15 @@
 
 @keyframes moveLoop {
     0% {
-        transform: translate(-180%, -300%);
+        transform: translate(-120%, -100%);
     }
     50% {
-        transform: translate(170%, 300%);
+        transform: translate(100%, 100%);
     }
     100% {
-        transform: translate(-180%, -300%);
+        transform: translate(-120%, -100%);
     }
 }
-
 .caracteristica {
     display: inline-block;
     text-align: center;
