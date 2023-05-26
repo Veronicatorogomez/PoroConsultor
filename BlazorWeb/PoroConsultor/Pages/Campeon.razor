@@ -41,7 +41,7 @@
 		</div>
 
 
-		<video class="video" autoplay muted=true @onended="VideoBucle">
+		<video class="video" autoplay @onended="VideoBucle">
 			<source  class="srcVideo" src="@campeon.VideoHabilidad[habilidad]">
 		</video>
 
@@ -99,18 +99,26 @@ else
 		}
 		campeon = campeones.First(x => x.Nombre == parametro);
 
+		
+	}
 
+	protected override async Task OnParametersSetAsync()
+	{
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
+		await jsModule.InvokeVoidAsync("muteVideo");
+		await base.OnParametersSetAsync();
 	}
 
 	private void DameNum(int i)
 	{
 		habilidad = i;
-
 	}
+
 	private void DameNumSkin(int i)
 	{
 		skin = i;
 	}
+
 	private async Task VideoBucle()
 	{
 		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
