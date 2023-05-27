@@ -155,3 +155,17 @@ html {
 button:hover {
     cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
 }
+
+::-webkit-scrollbar { /*define tamaño de la barra para subir y bajar*/
+    width: 10px !important;
+    height: 5px !important;
+}
+
+::-webkit-scrollbar-thumb { /*estilo de lo que mueves de la barra*/
+    background-color: goldenrod !important;
+    border-radius: 5px !important;
+}
+
+::-webkit-scrollbar-track { /*estilo del fondo de la barra*/
+    background-color: rgb(30,30,30) !important;
+}

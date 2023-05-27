@@ -24,19 +24,38 @@
     width: 30%;
     height: 40px;
     margin: auto 0 auto 35%;
-    text-align:center;
+    text-align: center;
+    border: solid dodgerblue;
+    border-radius: 500px;
+    color: dodgerblue;
+    box-shadow: 0 0 18px 5px lightblue;
 }
 
-.titulo2 {
-    width: 30%;
-    margin: auto 0 auto 30%;
-}
+#selector1 option{
+    color:black;
+
+    }
+
+
+    .titulo2 {
+        width: 30%;
+        margin: auto 0 auto 30%;
+    }
 #selector2 {
     width: 30%;
     height: 40px;
     margin: 20px 30% 20px;
     text-align: center;
+    border: solid dodgerblue;
+    border-radius: 500px;
+    color: dodgerblue;
+    box-shadow: 0 0 18px 5px lightblue;
 }
+
+#selector2 option {
+    color: black;
+}
+
 
 #boton{
     margin:auto 0 auto 46%;
@@ -242,4 +261,18 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+}
+
+select::-webkit-scrollbar { /*define tamaño de la barra para subir y bajar*/
+    width: 10px;
+    height: 5px;
+}
+
+select::-webkit-scrollbar-thumb { /*estilo de lo que mueves de la barra*/
+    background-color: blue;
+    border-radius: 5px;
+}
+
+select::-webkit-scrollbar-track { /*estilo del fondo de la barra*/
+    background-color: white;
 }

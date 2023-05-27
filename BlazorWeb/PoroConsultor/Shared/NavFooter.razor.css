@@ -1,0 +1,28 @@
+﻿
+a {
+    font-size: 20px;
+    margin:20px 50px 20px 50px !important;
+    text-align: center;
+    font-size: large;
+    color:white;
+}
+.footImagen {
+    width: auto;
+    height: 80px;
+    margin:auto;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:auto auto;
+}
+.pie {
+    margin-top: 0;
+    text-align: center;
+    height: 100px;
+    background-color: rgb(30,30,30);
+}
+
+hr{
+    margin:0;
+}
