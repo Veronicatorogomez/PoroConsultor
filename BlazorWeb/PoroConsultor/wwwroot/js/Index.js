@@ -20,7 +20,7 @@ export function cargarAlerta() {
 }
 
 export function cerrarAlerta() {
-
+    console.log("hola");
     const alerta = document.getElementById("alerta");
     alerta.style.display = "none";
     const video = document.getElementsByTagName("video")[0];
