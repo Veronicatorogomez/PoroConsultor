@@ -1,6 +1,7 @@
 ﻿@page "/consultor"
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 <PageTitle>Consultor</PageTitle>
 @if (campeones.Count > 0)
@@ -70,12 +71,12 @@
 		</div>
 		@if (ganador != null)
 		{
-			<div class="contenedorGanador">
+			<div class="contenedorGanador" >
 				<p class="ganadorTexto">El ganador es :</p>
 				<p class="nombresConsultor">
 					@ganador.Nombre
 				</p>
-				<img class="imagenesGanador" src="@ganador.ImagenSkin[0]" />
+				<button @onclick="Redirigir" class="botonImagenGanador"><img class="imagenesGanador" src="@ganador.ImagenSkin[0]" /></button>
 						
 			</div>
 		}
@@ -91,6 +92,15 @@
 	{
 		<h1 class="sinBusqueda">Selecciona un campeón y empieza la CONSUUULTA</h1>
 	}
+}
+else
+{
+	<div id="app">
+		<svg class="loading-progress">
+			<circle r="40%" cx="50%" cy="50%" />
+			<circle r="40%" cx="50%" cy="50%" />
+		</svg>
+	</div>
 }
 
 
@@ -239,6 +249,10 @@
 	private async Task AnalizarDatos()
 	{
 		vs = true;
+		ganador = null;
+		contador1 = 0;
+		contador2 = 0;
+		Console.WriteLine("CacaNula");
 		campeon1 = campeones.First(x => x.Nombre.Equals(nombre1));
 		campeon2 = campeones.First(x => x.Nombre.Equals(nombre2));
 		ganadorVida = ConvertirNum(campeon1.Vida, campeon2.Vida);
@@ -255,7 +269,7 @@
 		Ganador();
 
 	}
-	public void Comparar()
+	private void Comparar()
 	{
 		if (ganadorVida.Equals(campeon1.Vida))
 		{
@@ -346,20 +360,24 @@
 		}
 	}
 
-	public void Ganador()
+	private void Ganador()
 	{
-		if(contador1> contador2)
+
+
+		if(contador1 > contador2)
 		{
+			Console.WriteLine("Caca1");
 			ganador = campeon1;
 		}
-		else if(contador2>contador1)
+		else if(contador2 >contador1)
 		{
+			Console.WriteLine("Caca2");
 			ganador = campeon2;
 		}
-		
+
 	}
 
-	public string ConvertirNum(string dato, string dato2)
+	private string ConvertirNum(string dato, string dato2)
 	{
 		int a = int.Parse(dato);
 		int b = int.Parse(dato2);
@@ -374,6 +392,11 @@
 		}
 
 		return c.ToString();
+	}
+
+	private void Redirigir()
+	{
+		NavigationManager.NavigateTo($"/campeon/{ganador.Nombre}");
 	}
 
 

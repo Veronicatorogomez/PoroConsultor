@@ -28,12 +28,13 @@
     border:solid 4px orange;
     box-shadow:5px 3px 0 0 ;
     border-radius:1000px;
-    transition:1s ease-in-out;
+    transition:0.4s ease-in-out;
 }
-#boton:hover{
-    box-shadow:1px 1px 0 0 orange;
-    margin:auto 59.5% auto 46.5%;
-}
+    #boton:hover {
+        box-shadow: 1px 1px 0 0 orange;
+        transition: 0.4s ease-in-out;
+        margin: auto 0 auto 46.5%;
+    }
 
 .vsImagen {
     text-align: center;
@@ -142,8 +143,8 @@
 }
 
 .imagenesGanador {
-    width: 80%;
-    margin: 5% 20% 15% 15%;
+    width: 100%;
+    margin: auto;
     box-shadow: 0 0 15px 3px black;
 }
 
@@ -160,7 +161,7 @@
 @media (max-width:1000px){
     #boton{
         margin-left:40%;
-        transition:1s ease-in-out;
+        transition:0.4s ease-in-out;
     }
 
     #boton:hover {
@@ -181,5 +182,14 @@
 .imagenTonto {
     width: 10%;
     margin-left:20px;
+
+}
+
+.botonImagenGanador {
+    width: 70%;
+    margin: auto;
+    margin-bottom:100px;
+    border:0;
+    background:unset;
 
 }
