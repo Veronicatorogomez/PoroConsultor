@@ -5,7 +5,6 @@ export function checkScroll() {
     for (let i = 0; i < imagenes.length; i++) {
         let alturaImagen = imagenes[i].offsetTop;
         if (alturaImagen - 500 < scrollTop) {
-            imagenes[i].style.opacity = 1;
             imagenes[i].classList.add("mostrarDerecha");
         }
     }

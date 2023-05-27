@@ -1,5 +1,6 @@
 ﻿@page "/ranking"
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
 
@@ -54,7 +55,7 @@
 	}
 	else
 	{
-		<p class="alerta">Elige caracteristica y roll para comparar</p>
+		<p id="alerta">Elige caracteristica y roll para comparar<br><br><button @onclick="QuitarAlerta" class="aceptaAlerta">Aceptar</button></p>
 		botonPulsado = false;
 	}
 }
@@ -77,6 +78,7 @@ else
 	private List<List<int>> filtradosValor;
 	private List<List<Union>> filtrados;
 	private bool botonPulsado;
+	private IJSObjectReference module;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -94,7 +96,6 @@ else
 				}
 			}
 		}
-		//campeones = UnirListas(campeonesStats, campeonesInfo);
 	}
 
 	private void NavegaACampeon(string campeon)
@@ -102,78 +103,11 @@ else
 		NavigationManager.NavigateTo($"/campeon/{campeon}");
 	}
 
-	//public List<Union> UnirListas(List<Estadisticas> personajesStats, List<Campeones> personajes)
-	//{
-	//	var listaUnida = from a in personajes
-	//						join b in personajesStats on a.Nombre equals b.Nombre
-	//						select new
-	//						{
-	//							Nombre = a.Nombre,
-	//							Apodo = a.Apodo,
-	//							ImagenPrincipal = a.ImagenPrincipal,
-	//							Descripcion = a.Descripcion,
-	//							Rol = a.Rol,
-	//							Dificultad = a.Dificultad,
-	//							ImagenHabilidad = a.ImagenHabilidad,
-	//							TipoHabilidad = a.TipoHabilidad,
-	//							NombreHabilidad = a.NombreHabilidad,
-	//							DescripcionHabilidad = a.DescripcionHabilidad,
-	//							VideoHabilidad = a.VideoHabilidad,
-	//							IconoSkin = a.IconoSkin,
-	//							NombreSkin = a.NombreSkin,
-	//							ImagenSkin = a.ImagenSkin,
-	//							PorcentajeAD = b.PorcentajeAD,
-	//							PorcentajeAP = b.PorcentajeAP,
-	//							PorcentajeTD = b.PorcentajeTD,
-	//							Vida = b.Vida,
-	//							Mana = b.Mana,
-	//							Dano = b.Dano,
-	//							Armadura = b.Armadura,
-	//							ResistenciaMagica = b.ResistenciaMagica,
-	//							TipoEnergia = b.TipoEnergia,
-	//							VidaRegen = b.VidaRegen,
-	//							ManaRegen = b.ManaRegen,
-	//							Alcance = b.Alcance,
-	//							ProbabilidadCritico = b.ProbabilidadCritico,
-	//							Velocidad = b.Velocidad,
-	//							VelocidadDeAtaque = b.VelocidadDeAtaque
-	//						};
-	//	List<Union> listaUnidaFinal = listaUnida.Select(obj =>
-	//		new Union
-	//			{
-	//				Nombre = obj.Nombre,
-	//				Apodo = obj.Apodo,
-	//				ImagenPrincipal = obj.ImagenPrincipal,
-	//				Descripcion = obj.Descripcion,
-	//				Rol = obj.Rol,
-	//				Dificultad = obj.Dificultad,
-	//				ImagenHabilidad = obj.ImagenHabilidad,
-	//				TipoHabilidad = obj.TipoHabilidad,
-	//				NombreHabilidad = obj.NombreHabilidad,
-	//				DescripcionHabilidad = obj.DescripcionHabilidad,
-	//				VideoHabilidad = obj.VideoHabilidad,
-	//				IconoSkin = obj.IconoSkin,
-	//				NombreSkin = obj.NombreSkin,
-	//				ImagenSkin = obj.ImagenSkin,
-	//				PorcentajeAD = obj.PorcentajeAD,
-	//				PorcentajeAP = obj.PorcentajeAP,
-	//				PorcentajeTD = obj.PorcentajeTD,
-	//				Vida = obj.Vida,
-	//				Mana = obj.Mana,
-	//				Dano = obj.Dano,
-	//				Armadura = obj.Armadura,
-	//				ResistenciaMagica = obj.ResistenciaMagica,
-	//				TipoEnergia = obj.TipoEnergia,
-	//				VidaRegen = obj.VidaRegen,
-	//				ManaRegen = obj.ManaRegen,
-	//				Alcance = obj.Alcance,
-	//				ProbabilidadCritico = obj.ProbabilidadCritico,
-	//				Velocidad = obj.Velocidad,
-	//				VelocidadDeAtaque = obj.VelocidadDeAtaque
-	//			}).ToList();
-	//	return listaUnidaFinal;
-	//}
-
+	private async Task QuitarAlerta()
+	{
+		module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Ranking.js");
+		await module.InvokeVoidAsync("quitarAlerta");
+	}
 
 	private void Filtrar()
 	{
@@ -237,48 +171,5 @@ else
 				break;
 		}
 
-
-
 	}
-
-	//private void CrearTabla(List<Union> campeonesFiltro)
-	//{
-	//	// Ordena la lista de objetos por la Vida de mayor a menor
-
-
-	//	// Calcula la altura máxima del gráfico
-	//	int alturaMaxima = primeros10Objetos.Max(objeto => int.Parse(objeto.Vida));
-
-	//	// Calcula la anchura de cada barra
-	//	int anchoBarra = 30;
-
-	//	// Calcula el espacio entre cada barra
-	//	int espacioEntreBarras = 10;
-
-	//	// Calcula la posición inicial de la primera barra
-	//	int posicionInicialX = 50;
-	//	int posicionInicialY = 350;
-
-	//	List<int> posicionesX = new List<int>();
-	//	List<int> posicionesY = new List<int>();
-	//	List<int> alturas = new List<int>();
-
-	//	// Dibuja las barras en el gráfico
-	//	for (var i = 0; i < primeros10Objetos.Count; i++)
-	//	{
-	//		var objeto = primeros10Objetos[i];
-
-	//		// Calcula la altura de la barra proporcional a la Vida del objeto
-	//		int alturaBarra = (int)((int.Parse(objeto.Vida) / (double)alturaMaxima) * 300);
-	//		alturas.Add(alturaBarra);
-
-	//		// Calcula la posición de la barra en el eje X
-	//		posicionesX.Add(posicionInicialX + (i * (anchoBarra + espacioEntreBarras)));
-
-	//		// Calcula la posición de la barra en el eje Y
-	//		posicionesY.Add(posicionInicialY - alturaBarra);
-
-
-	//	}
-	//}
 }

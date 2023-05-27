@@ -4,18 +4,18 @@
 
 @if (campeon != null)
 {
-	<h1>@campeon.Nombre</h1>
-	<h2>@campeon.Apodo</h2>
+	<h1 class="mostrarDerecha">@campeon.Nombre</h1>
+	<h2 class="mostrarDerecha">@campeon.Apodo</h2>
 
 	<div class="gridContainer">
 
-		<img class="imagenPrincipal" src="@campeon.ImagenSkin[0]">
+		<img class="imagenPrincipal mostrarDerecha" src="@campeon.ImagenSkin[0]">
 
 		
 			<div class="imagenRolDificultad">
-				<p class="roll"><span class="whiteText">ROLL:</span><br>@campeon.Rol</p>
-				<p class="dificultad"><span class="whiteText">DIFICULTAD:</span><br>@campeon.Dificultad</p>
-				<p class="descripcion">@campeon.Descripcion</p>
+			<p class="roll mostrarDerecha"><span class="whiteText">ROLL:</span><br>@campeon.Rol</p>
+			<p class="dificultad mostrarDerecha"><span class="whiteText">DIFICULTAD:</span><br>@campeon.Dificultad</p>
+			<p class="descripcion mostrarDerecha">@campeon.Descripcion</p>
 			</div>
 		
 
@@ -25,13 +25,13 @@
 				@for (int i = 0; i < campeon.ImagenHabilidad.Count; i++)
 				{
 					int numero = i;
-					<button class="botonImagenHabilidad" @onclick="() => DameNum(numero)"><img class="imagenHabilidad" src="@campeon.ImagenHabilidad[i]"></button>
+					<button class="botonImagenHabilidad animacion" @onclick="() => DameNum(numero,campeon.VideoHabilidad[habilidad])"><img class="imagenHabilidad" src="@campeon.ImagenHabilidad[i]"></button>
 
 				}
 
 			</div>
 
-			<div class="infoHabilidades">
+			<div class="infoHabilidades animacion">
 				<p class="nombreHabilidad">@campeon.NombreHabilidad[habilidad]</p>
 				<p class="tipoHabilidad">@campeon.TipoHabilidad[habilidad]</p>
 				<p>@campeon.DescripcionHabilidad[habilidad]</p>
@@ -41,8 +41,8 @@
 		</div>
 
 
-		<video class="video" autoplay @onended="VideoBucle">
-			<source  class="srcVideo" src="@campeon.VideoHabilidad[habilidad]">
+		<video style="background-image:url('./Recursos/poros/@fondoVideo')" class="video animacion" autoplay loop>
+			<source class="srcVideo" src="@campeon.VideoHabilidad[habilidad]">
 		</video>
 
 
@@ -53,12 +53,12 @@
 		@for (int i = 0; i < campeon.IconoSkin.Count; i++)
 		{
 			int numerito = i;
-			<button class="botonesIconosSkins" @onclick="() => DameNumSkin(numerito)"><img class="iconosSkins" src="@campeon.IconoSkin[i]"></button>
+			<button class="botonesIconosSkins animacion" @onclick="() => DameNumSkin(numerito)"><img class="iconosSkins" src="@campeon.IconoSkin[i]"></button>
 		}
 	</div>
 
-	<h1>@campeon.NombreSkin[skin]</h1>
-	<img class="imagenSkin" src="@campeon.ImagenSkin[skin]">
+	<h1 class="animacion">@campeon.NombreSkin[skin]</h1>
+	<img class="imagenSkin animacion" src="@campeon.ImagenSkin[skin]">
 }
 else
 {
@@ -70,9 +70,19 @@ else
 	</div>
 }
 
+@if (easterEgg)
+{
+	@foreach (var poro in poritos)
+	{
+		Random random = new Random();
+		<img class="poro" style="top:@(random.Next(10,100))%; left:@(random.Next(5,95))%;" src="/Recursos/poros/@poro" @onmouseover="QuitarPoro" />
+	}
+}
+
 @code {
 	[Parameter]
 	public string parametro { get; set; }
+	private const int NUMERO_POROS = 3;
 	private List<Estadisticas> campeonesStats;
 	private List<Campeones> campeonesInfo;
 	private List<Union> campeones = new List<Union>();
@@ -80,6 +90,9 @@ else
 	private IJSObjectReference jsModule;
 	private int habilidad = 0;
 	private int skin = 0;
+	private string[] poritos = new string[NUMERO_POROS];
+	private string fondoVideo;
+	private bool easterEgg;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -97,26 +110,42 @@ else
 				}
 			}
 		}
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
+		await jsModule.InvokeVoidAsync("checkScroll");
 		campeon = campeones.First(x => x.Nombre == parametro);
+		Random random = new Random();
+		fondoVideo = random.Next(1, 17).ToString() + ".png";
 
-		
+		for (int i = 0; i < poritos.Length; i++)
+		{
+			poritos[i] = random.Next(1, 17).ToString() + ".png";
+		}
+
 	}
 
 	protected override async Task OnParametersSetAsync()
 	{
 		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
 		await jsModule.InvokeVoidAsync("muteVideo");
+		easterEgg = await ObtenerValorBooleano();
 		await base.OnParametersSetAsync();
 	}
 
-	private void DameNum(int i)
+	private async Task DameNum(int i, string video)
 	{
 		habilidad = i;
+		await jsModule.InvokeVoidAsync("loadAnotherVideo", video);
 	}
 
 	private void DameNumSkin(int i)
 	{
 		skin = i;
+	}
+
+	private async Task<bool> ObtenerValorBooleano()
+	{
+		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
+		return await jsModule.InvokeAsync<bool>("existeEasteregg");
 	}
 
 	private async Task VideoBucle()

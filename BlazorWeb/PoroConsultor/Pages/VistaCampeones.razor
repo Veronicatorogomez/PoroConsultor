@@ -16,7 +16,9 @@
 }
 else
 {
-	<input id="buscador" type="text" placeholder="Buscar..." @bind="@terminoBusqueda" @oninput="Buscar" />
+	<form id="buscador" action="">
+		<input class="buscador" type="search" name="nombre" placeholder="Busca tu campeon" @bind="@terminoBusqueda" @oninput="Buscar">
+	</form>
 
 	@if (!terminoBusquedaBool)
 	{
@@ -115,13 +117,13 @@ else
 	private async Task ScrollToTop()
 	{
 		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import","./js/VistaCampeones.js");
-		await jsModule.InvokeVoidAsync("goUp");
+		await jsModule.InvokeVoidAsync("scrollToTop");
 	}
 
 	private async Task GoDown()
 	{
 		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/VistaCampeones.js");
-		await jsModule.InvokeVoidAsync("goDown");
+		await jsModule.InvokeVoidAsync("scrollToBottom");
 	}
 
 	private void resetPagina()

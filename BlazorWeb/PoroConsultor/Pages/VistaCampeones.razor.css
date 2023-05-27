@@ -114,9 +114,31 @@ p.botonPaginado {
 }
 
 #buscador{
-    margin-top:50px;
+    margin-top:40px;
     margin-left:13%;
 }
+
+.buscador[type="search"] {
+    font-size: large;
+    width: 45px;
+    background: #FFF url('../Recursos/imagenes/lupa.png') no-repeat -30px center;
+    background-position: 8px 8px;
+    background-size: 25px;
+    padding: 9px 10px 9px 35px;
+    border-radius: 15em;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    outline: none;
+}
+
+    .buscador[type="search"]:focus {
+        width: 250px;
+        padding-left: 40px;
+        color: #000;
+        background-color: #FFF;
+    }
 
 @media (max-width:800px){
     #buscador {

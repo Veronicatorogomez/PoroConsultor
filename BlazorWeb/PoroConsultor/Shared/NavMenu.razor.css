@@ -1,11 +1,6 @@
-header { /*color y posicion fijada arriba*/
-    /*background-image: url("fondoHeader.jpg");*/ /*CAMBIAR SI QUIERO METER IMAGEN*/
-    /*background-repeat: no-repeat;
-    background-size: 2000px;
-    background-position-x: center;
-    background-position-y: -210px;*/
-    background-color: rgb(30, 30, 30); /*o black*/
-    border-bottom: solid 3px #D4AF37; /*CAMBIAR COLOR*/
+header { 
+    background-color: rgb(30, 30, 30); 
+    border-bottom: solid 3px #D4AF37; 
     position: sticky;
     top: 0;
     width: 100%;
@@ -45,14 +40,8 @@ header { /*color y posicion fijada arriba*/
     top: 8px;
     left: 30px;
     height: 90px;
+    z-index: 9999999;
 }
-
-/*#carrito { /*imagen del carrito
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 52px;
-}*/
 
 #casita { /*imagen de la casita*/
    position:relative;
@@ -70,7 +59,9 @@ header div {
 }
 
 .navbar-menu {
-    margin:auto;
+    margin: auto;
+    position:relative;
+    top:-30px;
 }
 .navbar {
     margin-left:80px;
@@ -155,4 +146,98 @@ header div {
     .navbar-toggle:checked ~ .navbar-menu {
         display: block;
     }
+}
+
+
+
+
+
+
+
+.poroContainer {
+    position: absolute;
+    top: 37px;
+    left: 70px;
+    animation: poroAnimation 10s;
+}
+
+.poro {
+    width: 50px;
+    height: 50px;
+    z-index: 9999998; /*1- que el logo*/
+}
+
+@keyframes poroAnimation {
+    0% {
+        top: 37px;
+        left: 70px;
+    }
+
+    5% {
+        top: 50px;
+    }
+
+    10% {
+        top: 40px;
+    }
+
+    15% {
+        top: 50px;
+    }
+
+    20% {
+        top: 40px;
+    }
+
+    25% {
+        top: 50px;
+    }
+
+    30% {
+        top: 40px;
+    }
+
+    35% {
+        top: 50px;
+    }
+
+    40% {
+        top: 40px;
+    }
+
+    45% {
+        top: 50px;
+    }
+
+    51% {
+        top: 35px;
+    }
+
+    57% {
+        top: 50px;
+    }
+    64% {
+        top: 35px;
+    }
+
+    71% {
+        top: 50px;
+        left: 90%;
+    }
+
+    75% {
+        top: 0px;
+        left: 92%;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        left: 95%;
+        top: 900%;
+        transform: rotate(360deg);
+    }
+}
+
+button{
+    all:unset;
 }

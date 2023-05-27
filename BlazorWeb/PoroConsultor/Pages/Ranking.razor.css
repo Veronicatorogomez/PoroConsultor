@@ -4,7 +4,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    background: #C9C9C9;
+    background-image: url("./Recursos/imagenes/aram.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     padding: 20px 3% 0 3%;
     border-left: 10px solid black;
     border-bottom: 5px solid black;
@@ -123,12 +125,15 @@
 @keyframes moveLoop {
     0% {
         transform: translate(-120%, -100%);
+        color:red;
     }
     50% {
         transform: translate(100%, 100%);
+        color:blue;
     }
     100% {
         transform: translate(-120%, -100%);
+        color:palevioletred;
     }
 }
 .caracteristica {
@@ -149,26 +154,42 @@
 }
 
     #rollYcaracteristica p {
-        font-size: x-large;
+        font-family: Arial Black;
         font-weight: bold;
+        font-size: 25px;
+        background: #202020;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
     }
     #rollYcaracteristica select {
         padding:10px;
         border-radius:15px;
     }
 
-.alerta{
-    position:absolute;
-    color:red;
-    background-color:white;
-    border:2px solid red;
-    padding:30px;
-    border-radius:15px;
-    width:30%;
-    top:50%;
-    left:30%;
-    min-width:200px;
-    text-align:center;
+#alerta {
+    position: absolute;
+    background-color: white;
+    border: 4px solid red;
+    padding: 30px;
+    border-radius: 15px;
+    width: 30%;
+    top: 50%;
+    left: 35%;
+    min-width: 200px;
+    text-align: center;
     font-weight: bold;
-
+    box-shadow: 0 0 10px 1px black;
+}
+.aceptaAlerta {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }

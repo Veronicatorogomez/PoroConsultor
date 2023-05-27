@@ -128,9 +128,22 @@ h2 {
     display: block;
     margin: 0 auto 0 auto;
     box-shadow: 0 0 15px 5px black;
+    background-color: black;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    background-position-x: 40%;
+    height: 100%;
 }
+    .video * {
+        
+    }
 
-
+    @media (max-width:1250px){
+        .video {
+            margin-top: 80px;
+            height:85%;
+        }
+    }
 
 
 
@@ -144,9 +157,9 @@ h2 {
 
 .botonesIconosSkins {
     height: 70px;
-    width: 70PX;
-    margin-top:20px;
+    width: 70px;
     padding:0;
+    margin: 50px auto 20px auto;
 }
 .iconosSkins {
     height: 70px;
@@ -174,3 +187,36 @@ h2 {
 button{
     all: unset;
 }
+
+.animacion{
+    opacity:0;
+}
+.mostrarDerecha {
+    opacity: 1 !important;
+    transition:2s;
+    animation: mostrarDerecha 2s;
+}
+@keyframes mostrarDerecha {
+    0% {
+        transform: translateX(60px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.poro {
+    position: absolute;
+    z-index: 999998; /*uno menos que el header para que este debajo*/
+    width: 70px;
+    height: 70px;
+    transition: 3s ease-in-out;
+    transition: transform 3s ease-in-out;
+}
+
+    .poro:hover {
+        display:none;
+        transform: rotate(360deg);
+        transition: 3s ease-in-out;
+    }

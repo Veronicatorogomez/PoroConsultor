@@ -1,21 +1,47 @@
-﻿<header>
-            <NavLink href=""><img id="logo" src="/Recursos/imagenes/logo.png"></NavLink>
-            <div class="navbar">
-                <input type="checkbox" id="navbar-toggle" class="navbar-toggle">
-                <label for="navbar-toggle" class="navbar-toggle-icon"></label>
-                <div class="navbar-menu">
-                  <ul class="ulHeader">
-                    <li><NavLink class="linkHeader" href=""><img id="casita" src="/Recursos/imagenes/CasaBlanca.png"></NavLink></li>
-                    <li><NavLink class="linkHeader" href="campeones">CAMPEONES</NavLink></li>
-                    <li><NavLink class="linkHeader" href="ranking">RANKING</NavLink></li>
-                    <li><NavLink class="linkHeader" href="consultor">CONSULTOR</NavLink></li>
-                    <li><NavLink class="linkHeader" href="administrador">ADMINISTRADOR</NavLink></li>
-                  </ul>
-                </div>
-            </div>
-            <NavLink href=""img id="carrito" src="CarroBlanco.png"></NavLink>
-        </header>
+﻿@inject IJSRuntime JSRuntime
+
+<header>
+	<button @onclick="PoritosSaltan"><img id="logo" src="/Recursos/imagenes/logo.png"></button>
+	<div class="navbar">
+		<input type="checkbox" id="navbar-toggle" class="navbar-toggle">
+		<label for="navbar-toggle" class="navbar-toggle-icon"></label>
+		<div class="navbar-menu">
+			<ul class="ulHeader">
+				<li><NavLink class="linkHeader" href=""><img id="casita" src="/Recursos/imagenes/CasaBlanca.png"></NavLink></li>
+				<li><NavLink class="linkHeader" href="campeones">CAMPEONES</NavLink></li>
+				<li><NavLink class="linkHeader" href="ranking">RANKING</NavLink></li>
+				<li><NavLink class="linkHeader" href="consultor">CONSULTOR</NavLink></li>
+			</ul>
+		</div>
+	</div>
+	@if (saltar)
+	{
+		Random random = new Random();
+		<div class="container">
+
+			<div class="poroContainer">
+				<img src="./Recursos/poros/@poritos[random.Next(0,16)]" class="poro">
+			</div>
+		</div>
+	}
+</header>
+
 
 @code {
+	private string[] poritos = new string[16];
+	public bool saltar { get; set; }
+	private IJSObjectReference jsModule;
 
+	protected override async Task OnInitializedAsync()
+	{
+		for (int i = 0; i < poritos.Length; i++)
+		{
+			poritos[i] = (i + 1).ToString() + ".png";
+		}
+	}
+
+	private async Task PoritosSaltan()
+	{
+		saltar = true;
+	}
 }

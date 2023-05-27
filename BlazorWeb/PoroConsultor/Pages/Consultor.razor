@@ -7,6 +7,8 @@
 @if (campeones.Count > 0)
 {
 	<div class="contenedorSelects">
+		<p class="titulo1">Primer campeon:</p>
+		<p class="titulo2">Segundo campeon:</p>
 		<select id="selector1" @bind="nombre1">
 			@foreach (var campeon in campeones)
 			{
@@ -27,71 +29,81 @@
 
 	@if (vs)
 	{
-		<div class="contenedorImagenesYNombres">
-			<img class="imagenesConsultor" src="@campeon1.ImagenSkin[0]" />
-			<img class="imagenesConsultor" src="@campeon2.ImagenSkin[0]" />
-			<p class="nombresConsultor">
-				@campeon1.Nombre
-			</p>
-			<p class="nombresConsultor">
-				@campeon2.Nombre
-			</p>
-		</div>
-		<div class="contenedorDatos">
-			<div class="datosCampeon">
-				<p class="dato" @ref="vida1">@campeon1.Vida</p>
-				<p class="dato" @ref="mana1">@campeon1.Mana</p>
-				<p class="dato" @ref="dano1">@campeon1.Dano</p>
-				<p class="dato" @ref="armadura1">@campeon1.Armadura</p>
-				<p class="dato" @ref="resistenciaMagica1">@campeon1.ResistenciaMagica</p>
-				<p class="dato" @ref="alcance1">@campeon1.Alcance</p>
-				<p class="dato" @ref="velocidad1">@campeon1.Velocidad</p>
-				<p class="dato" @ref="velocidadDeAtaque1">@campeon1.VelocidadDeAtaque</p>
-			</div>
-			<div class="estadisticas">
-				<p class="stat">Vida</p>
-				<p class="stat">Mana</p>
-				<p class="stat">Daño</p>
-				<p class="stat">Armadura</p>
-				<p class="stat">Resistencia Mágica</p>
-				<p class="stat">Alcance</p>
-				<p class="stat">Velocidad</p>
-				<p class="stat">Velocidad de Ataque</p>
-			</div>
-			<div class="datosCampeon">
-				<p class="dato" @ref="vida2">@campeon2.Vida</p>
-				<p class="dato" @ref="mana2">@campeon2.Mana</p>
-				<p class="dato" @ref="dano2">@campeon2.Dano</p>
-				<p class="dato" @ref="armadura2">@campeon2.Armadura</p>
-				<p class="dato" @ref="resistenciaMagica2">@campeon2.ResistenciaMagica</p>
-				<p class="dato" @ref="alcance2">@campeon2.Alcance</p>
-				<p class="dato" @ref="velocidad2">@campeon2.Velocidad</p>
-				<p class="dato" @ref="velocidadDeAtaque2">@campeon2.VelocidadDeAtaque</p>
-			</div>
-		</div>
-		@if (ganador != null)
+		if (nombre1 != "" && nombre2 != "" && botonPulsado)
 		{
-			<div class="contenedorGanador" >
-				<p class="ganadorTexto">El ganador es :</p>
+			<div class="contenedorImagenesYNombres">
+				<img class="imagenesConsultor" src="@campeon1.ImagenSkin[0]" />
+				<img class="imagenesConsultor" src="@campeon2.ImagenSkin[0]" />
 				<p class="nombresConsultor">
-					@ganador.Nombre
+					@campeon1.Nombre
 				</p>
-				<button @onclick="Redirigir" class="botonImagenGanador"><img class="imagenesGanador" src="@ganador.ImagenSkin[0]" /></button>
-						
+				<p class="nombresConsultor">
+					@campeon2.Nombre
+				</p>
 			</div>
+			<div class="contenedorDatos">
+				<div class="datosCampeon">
+					<p class="dato" @ref="vida1">@campeon1.Vida</p>
+					<p class="dato" @ref="mana1">@campeon1.Mana</p>
+					<p class="dato" @ref="dano1">@campeon1.Dano</p>
+					<p class="dato" @ref="armadura1">@campeon1.Armadura</p>
+					<p class="dato" @ref="resistenciaMagica1">@campeon1.ResistenciaMagica</p>
+					<p class="dato" @ref="alcance1">@campeon1.Alcance</p>
+					<p class="dato" @ref="velocidad1">@campeon1.Velocidad</p>
+					<p class="dato" @ref="velocidadDeAtaque1">@campeon1.VelocidadDeAtaque</p>
+				</div>
+				<div class="estadisticas">
+					<p class="stat">Vida</p>
+					<p class="stat">Mana</p>
+					<p class="stat">Daño</p>
+					<p class="stat">Armadura</p>
+					<p class="stat">Resistencia Mágica</p>
+					<p class="stat">Alcance</p>
+					<p class="stat">Velocidad</p>
+					<p class="stat">Velocidad de Ataque</p>
+				</div>
+				<div class="datosCampeon">
+					<p class="dato" @ref="vida2">@campeon2.Vida</p>
+					<p class="dato" @ref="mana2">@campeon2.Mana</p>
+					<p class="dato" @ref="dano2">@campeon2.Dano</p>
+					<p class="dato" @ref="armadura2">@campeon2.Armadura</p>
+					<p class="dato" @ref="resistenciaMagica2">@campeon2.ResistenciaMagica</p>
+					<p class="dato" @ref="alcance2">@campeon2.Alcance</p>
+					<p class="dato" @ref="velocidad2">@campeon2.Velocidad</p>
+					<p class="dato" @ref="velocidadDeAtaque2">@campeon2.VelocidadDeAtaque</p>
+				</div>
+			</div>
+			@if (ganador != null)
+			{
+				<div class="contenedorGanador">
+					<p class="ganadorTexto">El ganador es :</p>
+					<p class="nombresConsultor">
+						@ganador.Nombre
+					</p>
+					<button @onclick="Redirigir" class="botonImagenGanador"><img class="imagenesGanador" src="@ganador.ImagenSkin[0]" /></button>
+
+				</div>
+			}
+			else
+			{
+				<div class="tonto">
+					Estas comparando el mismo campeón... Y el ganador ERES TU
+					<img src="./Recursos/imagenes/medalla.png" class="imagenTonto" />
+				</div>
+			}
 		}
 		else
 		{
-			<div class="tonto">
-				Estas comparando el mismo campeón... Y el ganador ERES TU
-				<img src="./Recursos/imagenes/medalla.png" class="imagenTonto"/>
-			</div>
+			<p id="alerta">Elige dos personajes para comparar<br><br><button @onclick="QuitarAlerta" class="aceptaAlerta">Aceptar</button></p>
+			botonPulsado = false;
+
 		}
 	}
 	else
 	{
 		<h1 class="sinBusqueda">Selecciona un campeón y empieza la CONSUUULTA</h1>
 	}
+
 }
 else
 {
@@ -105,6 +117,7 @@ else
 
 
 @code {
+	private bool botonPulsado;
 	private List<Campeones> personajes;
 	private List<Estadisticas> estadisticas;
 	private List<Union> campeones = new List<Union>();
@@ -156,8 +169,12 @@ else
 				}
 			}
 		}
+		module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Ranking.js");
 	}
-
+	private async Task QuitarAlerta()
+	{
+		await module.InvokeVoidAsync("quitarAlerta");
+	}
 	private async Task Remover1()
 	{
 		module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Consultor.js");
@@ -248,25 +265,28 @@ else
 
 	private async Task AnalizarDatos()
 	{
+		botonPulsado = true;
 		vs = true;
 		ganador = null;
 		contador1 = 0;
 		contador2 = 0;
-		Console.WriteLine("CacaNula");
-		campeon1 = campeones.First(x => x.Nombre.Equals(nombre1));
-		campeon2 = campeones.First(x => x.Nombre.Equals(nombre2));
-		ganadorVida = ConvertirNum(campeon1.Vida, campeon2.Vida);
-		ganadorMana = ConvertirNum(campeon1.Mana, campeon2.Mana);
-		ganadorDano = ConvertirNum(campeon1.Dano, campeon2.Dano);
-		ganadorArmadura = ConvertirNum(campeon1.Armadura, campeon2.Armadura);
-		ganadorResistenciaMagica = ConvertirNum(campeon1.ResistenciaMagica, campeon2.ResistenciaMagica);
-		ganadorAlcance = ConvertirNum(campeon1.Alcance, campeon2.Alcance);
-		ganadorVelocidad = ConvertirNum(campeon1.Velocidad, campeon2.Velocidad);
-		ganadorVelocidadDeAtaque = ConvertirNum(campeon1.VelocidadDeAtaque, campeon2.VelocidadDeAtaque);
-		module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Consultor.js");
-		await module.InvokeVoidAsync("quitarClase");
-		Comparar();
-		Ganador();
+		if (nombre1 != "" && nombre2 != "")
+		{
+			campeon1 = campeones.First(x => x.Nombre.Equals(nombre1));
+			campeon2 = campeones.First(x => x.Nombre.Equals(nombre2));
+			ganadorVida = ConvertirNum(campeon1.Vida, campeon2.Vida);
+			ganadorMana = ConvertirNum(campeon1.Mana, campeon2.Mana);
+			ganadorDano = ConvertirNum(campeon1.Dano, campeon2.Dano);
+			ganadorArmadura = ConvertirNum(campeon1.Armadura, campeon2.Armadura);
+			ganadorResistenciaMagica = ConvertirNum(campeon1.ResistenciaMagica, campeon2.ResistenciaMagica);
+			ganadorAlcance = ConvertirNum(campeon1.Alcance, campeon2.Alcance);
+			ganadorVelocidad = ConvertirNum(campeon1.Velocidad, campeon2.Velocidad);
+			ganadorVelocidadDeAtaque = ConvertirNum(campeon1.VelocidadDeAtaque, campeon2.VelocidadDeAtaque);
+			module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Consultor.js");
+			await module.InvokeVoidAsync("quitarClase");
+			Comparar();
+			Ganador();
+		}
 
 	}
 	private void Comparar()
@@ -364,12 +384,12 @@ else
 	{
 
 
-		if(contador1 > contador2)
+		if (contador1 > contador2)
 		{
 			Console.WriteLine("Caca1");
 			ganador = campeon1;
 		}
-		else if(contador2 >contador1)
+		else if (contador2 > contador1)
 		{
 			Console.WriteLine("Caca2");
 			ganador = campeon2;

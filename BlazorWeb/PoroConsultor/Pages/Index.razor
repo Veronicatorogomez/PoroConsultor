@@ -74,23 +74,23 @@
         NavigationManager.NavigateTo("/Ranking");
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
             
-        }
+    //    }
        
-    }
+    //}
 
-    protected override async Task OnParametersSetAsync()
-    {
-        //module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
-        //await module.InvokeVoidAsync("checkScroll");
-        await base.OnParametersSetAsync();
+    //protected override async Task OnParametersSetAsync()
+    //{
+    //    //module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
+    //    //await module.InvokeVoidAsync("checkScroll");
+    //    await base.OnParametersSetAsync();
 
-    }
+    //}
 
     public async Task CerrarAlerta()
     {
