@@ -141,8 +141,14 @@ p.botonPaginado {
     }
 
 @media (max-width:800px){
+    .buscador[type="search"] {
+        font-size: medium;
+    }
     #buscador {
-        margin-left: 18%;
+        margin-left: 20%;
+    }
+    .buscador[type="search"]:focus {
+        width: 200px;
     }
 }
 

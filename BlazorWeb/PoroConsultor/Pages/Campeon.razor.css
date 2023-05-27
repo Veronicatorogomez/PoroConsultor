@@ -1,6 +1,7 @@
 ﻿.gridContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    width:90%;
 }
 
 
@@ -37,15 +38,28 @@ h2 {
     color: transparent;
     text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 }
-
+@media (max-width:600px){
+    .imagenPrincipal {
+        width: 60% !important;
+    }
+    .imagenRolDificultad {
+        width: 60% !important;
+    }
+    .infoHabilidades {
+        width: 60% !important;
+    }
+}
 
 .imagenPrincipal{
     width:90%;
     margin:0 40px 30px 40px;
+    margin-left:10%;
     box-shadow:0 0 15px 3px black;
 }
 .imagenRolDificultad {
-    margin-top:50px;
+    width: 90%;
+    margin-left: 10%;
+    margin-top: 50px;
     text-align: center;
     margin-bottom: 140px;
 }
