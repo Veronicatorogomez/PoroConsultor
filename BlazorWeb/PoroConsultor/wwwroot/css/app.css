@@ -115,7 +115,11 @@ a.linkHeader {
     a.linkHeader:hover {
         all: unset;
         font-weight: bold;
+        cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
     }
+a:hover {
+    cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
+}
 
 @media (max-width:1100px) {
     #alerta {
@@ -142,4 +146,12 @@ a.linkHeader {
         padding: 3% !important;
         width: 50% !important;
     }
+}
+
+html {
+    cursor: url("../Recursos/cursor/Cursor1.cur"), auto;
+}
+
+button:hover {
+    cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
 }

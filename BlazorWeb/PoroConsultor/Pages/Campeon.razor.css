@@ -79,6 +79,7 @@ h2 {
         border: 2px dashed aqua;
         cursor: pointer;
         box-shadow: 0 0 15px 5px black;
+        cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
         transition: 0.3s ease-in-out;
     }
 .imagenHabilidad {
@@ -140,6 +141,7 @@ h2 {
         border: 2px dashed aqua;
         cursor: pointer;
         box-shadow: 0 0 25px 8px black;
+        cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
         transition: 0.4s ease-in-out;
     }
 

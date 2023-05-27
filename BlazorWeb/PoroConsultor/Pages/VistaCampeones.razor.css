@@ -61,11 +61,12 @@ p {
 .orden {
     position: absolute;
     top: 138px;
-    left:9%;
+    left: 9%;
     width: 50px;
     height: 50px;
     padding: 10px;
     border-radius: 10px;
+    cursor: url("../Recursos/cursor/Cursor2.cur"), auto !important;
     transition: 0.3s ease-in-out;
 }
 

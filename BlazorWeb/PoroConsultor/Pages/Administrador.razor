@@ -2,6 +2,33 @@
 
 <h3>Administrador</h3>
 
-@code {
+@if (contrasenaAcertada)
+{
+	<button class="btn" @onclick="ActualizarApi">Actualizar Api</button>
+}
+else
+{
+	<div class="bloqueAdmin">
+		<img class="logo" src="/Recursos/imagenes/favicon.png" />
+		<p class="texto">Introduce la contraseña:</p>
+		<input class="input" @bind="contrasena" />
+		<button class="btn"  @onclick="Comprobar">Acceder</button>
+	</div>
+}
 
+@code {
+	private bool contrasenaAcertada;
+	private string contrasena = string.Empty;
+	private string clave = "admin";
+
+	private void Comprobar(){
+		if (clave.Equals(contrasena))
+		{
+			contrasenaAcertada = true;
+		}
+	}
+	private void ActualizarApi()
+	{
+
+	}
 }
