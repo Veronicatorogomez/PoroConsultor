@@ -45,12 +45,12 @@ namespace PoroConsultor.Pages
 
         public void Redirigir2()
         {
-            NavigationManager.NavigateTo("/Consultor");
+            NavigationManager.NavigateTo("/consultor");
         }
 
         public void Redirigir3()
         {
-            NavigationManager.NavigateTo("/Ranking");
+            NavigationManager.NavigateTo("/ranking");
         }
 
         protected override async Task OnParametersSetAsync()
