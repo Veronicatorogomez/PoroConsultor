@@ -23,20 +23,4 @@
 </header>
 
 
-@code {
-	private string[] poritos = new string[16];
-	public bool saltar { get; set; }
 
-	protected override async Task OnInitializedAsync()
-	{
-		for (int i = 0; i < poritos.Length; i++)
-		{
-			poritos[i] = (i + 1).ToString() + ".png";
-		}
-	}
-
-	private async Task PoritosSaltan()
-	{
-		saltar = true;
-	}
-}
