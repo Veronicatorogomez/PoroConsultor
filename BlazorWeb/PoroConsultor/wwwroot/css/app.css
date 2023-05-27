@@ -169,3 +169,7 @@ button:hover {
 ::-webkit-scrollbar-track { /*estilo del fondo de la barra*/
     background-color: rgb(30,30,30) !important;
 }
+
+main{
+    min-height:1000px;
+}
