@@ -150,21 +150,14 @@ header div {
 
 
 
-
-
-
-
-.poroContainer {
+.poro {
     position: absolute;
     top: 37px;
     left: 70px;
-    animation: poroAnimation 10s;
-}
-
-.poro {
     width: 50px;
     height: 50px;
     z-index: 9999998; /*1- que el logo*/
+    animation: poroAnimation 10s;
 }
 
 @keyframes poroAnimation {

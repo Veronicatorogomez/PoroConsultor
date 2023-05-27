@@ -206,17 +206,3 @@ button{
     }
 }
 
-.poro {
-    position: absolute;
-    z-index: 999998; /*uno menos que el header para que este debajo*/
-    width: 70px;
-    height: 70px;
-    transition: 3s ease-in-out;
-    transition: transform 3s ease-in-out;
-}
-
-    .poro:hover {
-        display:none;
-        transform: rotate(360deg);
-        transition: 3s ease-in-out;
-    }

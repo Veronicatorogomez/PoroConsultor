@@ -70,19 +70,11 @@ else
 	</div>
 }
 
-@if (easterEgg)
-{
-	@foreach (var poro in poritos)
-	{
-		Random random = new Random();
-		<img class="poro" style="top:@(random.Next(10,100))%; left:@(random.Next(5,95))%;" src="/Recursos/poros/@poro" @onmouseover="QuitarPoro" />
-	}
-}
+
 
 @code {
 	[Parameter]
 	public string parametro { get; set; }
-	private const int NUMERO_POROS = 3;
 	private List<Estadisticas> campeonesStats;
 	private List<Campeones> campeonesInfo;
 	private List<Union> campeones = new List<Union>();
@@ -90,9 +82,8 @@ else
 	private IJSObjectReference jsModule;
 	private int habilidad = 0;
 	private int skin = 0;
-	private string[] poritos = new string[NUMERO_POROS];
 	private string fondoVideo;
-	private bool easterEgg;
+
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -116,10 +107,6 @@ else
 		Random random = new Random();
 		fondoVideo = random.Next(1, 17).ToString() + ".png";
 
-		for (int i = 0; i < poritos.Length; i++)
-		{
-			poritos[i] = random.Next(1, 17).ToString() + ".png";
-		}
 
 	}
 
@@ -127,13 +114,9 @@ else
 	{
 		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
 		await jsModule.InvokeVoidAsync("muteVideo");
-		easterEgg = await ObtenerValorBooleano();
 		await base.OnParametersSetAsync();
 	}
-	private void QuitarPoro()
-	{
-		
-	}
+
 
 	private async Task DameNum(int i, string video)
 	{
@@ -146,11 +129,7 @@ else
 		skin = i;
 	}
 
-	private async Task<bool> ObtenerValorBooleano()
-	{
-		jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Campeon.js");
-		return await jsModule.InvokeAsync<bool>("existeEasteregg");
-	}
+	
 
 	private async Task VideoBucle()
 	{

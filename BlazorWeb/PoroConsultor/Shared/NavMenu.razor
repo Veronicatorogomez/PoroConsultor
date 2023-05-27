@@ -1,6 +1,4 @@
-﻿@inject IJSRuntime JSRuntime
-
-<header>
+﻿<header>
 	<button @onclick="PoritosSaltan"><img id="logo" src="/Recursos/imagenes/logo.png"></button>
 	<div class="navbar">
 		<input type="checkbox" id="navbar-toggle" class="navbar-toggle">
@@ -17,11 +15,9 @@
 	@if (saltar)
 	{
 		Random random = new Random();
-		<div class="container">
 
-			<div class="poroContainer">
-				<img src="./Recursos/poros/@poritos[random.Next(0,16)]" class="poro">
-			</div>
+		<div class="poroContainer">
+			<img src="./Recursos/poros/@poritos[random.Next(0,16)]" class="poro">
 		</div>
 	}
 </header>
@@ -30,7 +26,6 @@
 @code {
 	private string[] poritos = new string[16];
 	public bool saltar { get; set; }
-	private IJSObjectReference jsModule;
 
 	protected override async Task OnInitializedAsync()
 	{

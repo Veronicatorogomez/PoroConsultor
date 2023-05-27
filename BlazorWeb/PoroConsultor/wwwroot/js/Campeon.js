@@ -23,11 +23,3 @@ export function checkScroll() {
 };
 window.addEventListener('scroll', checkScroll);
 
-export function existeEasteregg() {
-    const poro = document.querySelector(".poroContainer")
-    let existe = false;
-    if (poro != null) {
-        existe = true;
-    }
-    return existe;
-}

@@ -40,6 +40,15 @@ export function quitarSonido() {
 
 }
 
+export function existeEasteregg() {
+    const poro = document.querySelector(".poroContainer")
+    let existe = false;
+    if (poro != null) {
+        existe = true;
+    }
+    return existe;
+}
+
 
 
 
