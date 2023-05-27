@@ -58,7 +58,6 @@
         module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Index.js");
         await module.InvokeVoidAsync("cargarAlerta");
         await module.InvokeVoidAsync("checkScroll");
-        Console.WriteLine("CACA");
 
     }
 

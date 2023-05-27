@@ -9,7 +9,7 @@
 #selector1 {
     width: 30%;
     height: 40px;
-    margin: auto 0% auto 45%;
+    margin: auto 0% auto 35%;
     text-align:center;
 }
 
@@ -21,13 +21,14 @@
 }
 
 #boton{
-    margin:auto 60% auto 46%;
+    margin:auto 0 auto 46%;
     text-align:center;
     width:100px;
     height:100px;
     border:solid 4px orange;
     box-shadow:5px 3px 0 0 ;
     border-radius:1000px;
+    transition:1s ease-in-out;
 }
 #boton:hover{
     box-shadow:1px 1px 0 0 orange;
@@ -39,4 +40,146 @@
     width: 100%;
     height: 90px;
     border-radius: 1000px;
+}
+
+.contenedorImagenesYNombres {
+    display:grid;
+    grid-template-columns:auto auto;
+    width:90%;
+    margin:auto;
+}
+
+.imagenesConsultor {
+    width: 70%;
+    height:90%;
+    margin: 0 auto 10px auto;
+    box-shadow: 0 0 15px 3px black;
+}
+
+.nombresConsultor {
+    text-align: center;
+    font-family: Arial Black;
+    font-weight: bold;
+    font-size: 30px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
+
+
+.contenedorDatos {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 95%;
+    margin: 5% auto 5% auto;
+    background-image: url("./Recursos/imagenes/grieta.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    box-shadow: 0 0 15px 3px black;
+}
+
+.datosCampeon {
+    display: grid;
+    width: 20%;
+    height: 400px;
+    margin: auto;
+}
+
+.dato {
+    width: 80%;
+    height: 40px;
+    margin: auto;
+    text-align: center;
+    color:white;
+    
+}
+
+.estadisticas {
+    display: grid;
+    width: 40%;
+    margin: 0 auto 5% auto;
+}
+
+.stat {
+    text-align: center;
+    margin: auto;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    font-size: large;
+    color: #EBD758;
+    text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
+    6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+}
+
+.ganador
+{
+    font-family: Arial;
+    font-size: 20px;
+    color:gold;
+    text-shadow: 0px 0px 9px darkgoldenrod;
+}
+
+.contenedorGanador {
+    display: grid;
+    grid-template-columns: auto;
+    width: 90%;
+    margin: auto;
+}
+
+.ganadorTexto{
+    text-align: left;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    font-size: 50px;
+    color: #EBD758;
+    text-shadow: -1px 0 #414D68, 0 1px #414D68, 1px 0 #414D68, 0 -1px #414D68, -2px 2px 0 #414D68, 2px 2px 0 #414D68, 1px 1px #414D68, 2px 2px #414D68, 3px 3px #414D68, 4px 4px #414D68, 5px 5px #414D68;
+    6px 6px #414D68, 7px 7px #414D68, 8px 8px #414D68, 9px 9px #414D68;
+}
+
+.imagenesGanador {
+    width: 80%;
+    margin: 5% 20% 15% 15%;
+    box-shadow: 0 0 15px 3px black;
+}
+
+.sinBusqueda {
+    text-align: center;
+    font-family: Arial Black;
+    font-weight: bold;
+    margin:5% auto 5% auto;
+    font-size: 30px;
+    color: #000; /* Color del texto en negro */
+    text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #acacac, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.2), 0 20px 20px rgba(0,0,0,0.15);
+}
+
+@media (max-width:1000px){
+    #boton{
+        margin-left:40%;
+        transition:1s ease-in-out;
+    }
+
+    #boton:hover {
+            box-shadow: 1px 1px 0 0 orange;
+            margin: auto 0 auto 40.5%;
+            transition:0.3s;
+        }
+}
+.tonto {
+    text-align: center;
+    font-family: Arial Black;
+    font-weight: bold;
+    margin: 5% auto 5% auto;
+    font-size: 30px;
+    color: #000; /* Color del texto en negro */
+    text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #acacac, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.2), 0 20px 20px rgba(0,0,0,0.15);
+}
+.imagenTonto {
+    width: 10%;
+    margin-left:20px;
+
 }
