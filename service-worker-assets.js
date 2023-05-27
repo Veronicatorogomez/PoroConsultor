@@ -25,7 +25,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-TnyJmUbqAzhpEoVmO2XpDmJXru9bhdMx9Ht0YAVLqkY=",
+      "hash": "sha256-FLJLX1bqtHW\/MW6mGWXWhH1CN1DlBE7+eQ99UHQreXc=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -85,7 +85,7 @@
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
     },
     {
-      "hash": "sha256-hvYCZhLZKyZUChC\/8LpHBpjMiH+VbeMDRAYy0kILw58=",
+      "hash": "sha256-SNLExHW23R7wJqAYngcxpZFduE3MjAPTsliiMU5w2CE=",
       "url": "_framework\/PoroConsultor.dll"
     },
     {
@@ -153,7 +153,7 @@
       "url": "_framework\/dotnet.7.0.5.elsi7hikxx.js"
     },
     {
-      "hash": "sha256-vn1LLwYomDLSunYm2eZzeJ0nMj\/GTziloFj\/wWbDmL0=",
+      "hash": "sha256-fC9bUfpiLuYpTKLpYFFJ7TkZDTEob028rBZo\/jwbXuA=",
       "url": "_framework\/dotnet.wasm"
     },
     {
@@ -405,5 +405,5 @@
       "url": "Recursos\/video\/videoLol.mp4"
     }
   ],
-  "version": "dEoEq4vM"
+  "version": "NaULbgtW"
 };
