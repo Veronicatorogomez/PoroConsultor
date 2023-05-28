@@ -157,7 +157,7 @@
       "url": "_framework\/dotnet.wasm"
     },
     {
-      "hash": "sha256-27MNz8J6JwKRT6VoOI9dvomaLpQgp9dXqr5TLwTernM=",
+      "hash": "sha256-gxc54GKtO2jC4g27\/Rbl9kZ57ZPbxMba1l0Qjl28m94=",
       "url": "PoroConsultor.styles.css"
     },
     {
@@ -405,5 +405,5 @@
       "url": "Recursos\/video\/videoLol.mp4"
     }
   ],
-  "version": "K577Jv\/v"
+  "version": "HlfDq2te"
 };
