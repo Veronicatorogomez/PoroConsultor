@@ -121,7 +121,7 @@ p.botonPaginado {
 .buscador[type="search"] {
     font-size: large;
     width: 45px;
-    background: #FFF url('../Recursos/imagenes/lupa.png') no-repeat -30px center;
+    background: #FFF url('./Recursos/imagenes/lupa.png') no-repeat -30px center;
     background-position: 8px 8px;
     background-size: 25px;
     padding: 9px 10px 9px 35px;
