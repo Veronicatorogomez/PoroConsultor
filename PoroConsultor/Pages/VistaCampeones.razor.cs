@@ -41,7 +41,7 @@ namespace PoroConsultor.Pages
 
         private void NavegaACampeon(string campeon)
         {
-            NavigationManager.NavigateTo($"/campeon/{campeon}");
+            NavigationManager.NavigateTo($"./campeon/{campeon}");
         }
 
         private async Task ScrollToTop()

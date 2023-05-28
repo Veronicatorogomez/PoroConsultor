@@ -40,17 +40,17 @@ namespace PoroConsultor.Pages
 
         public void Redirigir1()
         {
-            NavigationManager.NavigateTo("/campeones");
+            NavigationManager.NavigateTo("./campeones");
         }
 
         public void Redirigir2()
         {
-            NavigationManager.NavigateTo("/consultor");
+            NavigationManager.NavigateTo("./consultor");
         }
 
         public void Redirigir3()
         {
-            NavigationManager.NavigateTo("/ranking");
+            NavigationManager.NavigateTo("./ranking");
         }
 
         protected override async Task OnParametersSetAsync()

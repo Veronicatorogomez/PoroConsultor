@@ -52,7 +52,7 @@
     @foreach (var poro in poritos)
     {
         Random random = new Random();
-        <img class="poro" style="top:@(random.Next(10,100))%; left:@(random.Next(5,95))%;" src="/Recursos/poros/@poro" @onmouseover="QuitarPoro" />
+        <img class="poro" style="top:@(random.Next(10,100))%; left:@(random.Next(5,95))%;" src="./Recursos/poros/@poro" @onmouseover="QuitarPoro" />
     }
 }
 

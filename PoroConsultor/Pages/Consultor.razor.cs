@@ -326,7 +326,7 @@ namespace PoroConsultor.Pages
 
         private void Redirigir()
         {
-            NavigationManager.NavigateTo($"/campeon/{ganador.Nombre}");
+            NavigationManager.NavigateTo($"./campeon/{ganador.Nombre}");
         }
     }
 }
